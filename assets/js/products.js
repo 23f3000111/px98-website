@@ -13,7 +13,7 @@ window.PX98_PRODUCTS = [
   "industry": "API SP-RC, ILSAC GF-6A",
   "oem": "Chrysler MS-6395, Ford WSS-M2C947-A, Ford WSS-M2C947-B1, GM dexos1™ Gen 3",
   "apps": "Naturally Aspirated, Turbocharged, GDI & Hybrid (HEV) Gasoline Engines",
-  "desc": "Powered by state-of-the-art additive technology, PX98 ECO PLUS SAE 0W-20 SP-RC/GF-6A is engineered to meet the demands of the latest generation gasoline engines equipped with modern direct injection, turbocharging, and fuel-saving technologies. It offers superior winter pumpability, optimized oxidation stability, excellent deposits control, and dependable protection against wear while supporting improved fuel efficiency.",
+  "desc": "Powered by state-of-the-art additive technology, PX98 ECO POWER SAE 0W-20 SP-RC/GF-6A is engineered to meet the demands of the latest generation gasoline engines equipped with modern direct injection, turbocharging, and fuel-saving technologies. It offers superior winter pumpability, optimized oxidation stability, excellent deposits control, and dependable protection against wear while supporting improved fuel efficiency.",
   "specs": [
    {
     "k": "Viscosity Grade",
@@ -53,7 +53,7 @@ window.PX98_PRODUCTS = [
   "industry": "API SP-RC, ACEA A5/B5, ILSAC GF-6A",
   "oem": "Ford WSS-M2C913-D, Honda, Mazda, Jaguar Land Rover STJLR.03.5003, Subaru, Volvo VCC 95200377",
   "apps": "Naturally Aspirated, Turbocharged, GDI & Hybrid (HEV) Gasoline Engines",
-  "desc": "Powered by state-of-the-art additive technology, PX98 ECO PLUS SAE 0W-30 SP-RC/GF-6A provides the ideal balance of fuel-economy performance, protection, and emission system compatibility. Formulated to meet both API SP and ACEA A5/B5 requirements, it delivers superior thermal stability, piston cleanliness, wear protection, and gasoline particulate filters protection while supporting extended engine durability and improved fuel efficiency in modern European and Japanese passenger vehicles.",
+  "desc": "Powered by state-of-the-art additive technology, PX98 ECO POWER SAE 0W-30 SP-RC/GF-6A provides the ideal balance of fuel-economy performance, protection, and emission system compatibility. Formulated to meet both API SP and ACEA A5/B5 requirements, it delivers superior thermal stability, piston cleanliness, wear protection, and gasoline particulate filters protection while supporting extended engine durability and improved fuel efficiency in modern European and Japanese passenger vehicles.",
   "specs": [
    {
     "k": "Viscosity Grade",
