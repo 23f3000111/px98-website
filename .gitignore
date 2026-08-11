@@ -1,0 +1,12 @@
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+__MACOSX/
+.vscode/
+.idea/
+
+# tooling output
+.playwright-mcp/
+*.log
+node_modules/
