@@ -32,7 +32,10 @@ assets/
   js/chat.js          PX98 assistant: guided product finder + catalogue search
   img/labels/         approved label artwork, one file per product id
   img/packs/          3D pack renders, used in the hero
+  img/brand/          wordmarks, plus the favicon set
   img/                photography and brand marks
+favicon.ico           16/32/48, the yellow "98" tile
+site.webmanifest      names the 192 and 512 install icons
 ```
 
 ## Product artwork

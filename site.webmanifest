@@ -1,0 +1,13 @@
+{
+  "name": "PX98 - Precision in Every Revolution",
+  "short_name": "PX98",
+  "description": "Premium automotive lubricants by Prince Global Pte. Ltd., Singapore.",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#08090a",
+  "theme_color": "#08090a",
+  "icons": [
+    { "src": "assets/img/brand/icon-192.png", "type": "image/png", "sizes": "192x192" },
+    { "src": "assets/img/brand/icon-512.png", "type": "image/png", "sizes": "512x512" }
+  ]
+}
