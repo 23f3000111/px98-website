@@ -110,8 +110,36 @@ ul { list-style: none; }
    property resolves against the stylesheet that consumes it, so an HTML-relative
    path would 404. Swap a photo by editing one line below. */
 .shot--workshop { --shot: url("../img/scene-workshop.jpg"); }
-.shot--drive    { --shot: url("../img/scene-drive.jpg"); }
-.shot--pixels   { --shot: url("../img/scene-pixels.webp"); }
+
+/* ---------- drawn section grounds ----------
+   Stands in for the four car photographs the client asked us to replace but has
+   not supplied yet. Same two-layer structure as .sect--photo, so a licensed
+   photograph drops in by swapping the class back and setting --shot.
+
+   Both grounds come out of the pack label's own vocabulary rather than being
+   invented: --streak is the warm light band running behind the PX98 logo on
+   every label, --lattice is the molecular field the technology copy describes. */
+.sect--ground { position: relative; isolation: isolate; overflow: hidden; background: var(--ink); }
+.sect--ground::before { content: ''; position: absolute; inset: 0; z-index: -2; pointer-events: none; }
+.sect--ground::after {
+  content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: var(--shot-fade,
+    linear-gradient(90deg, rgba(8,9,10,.9) 0%, rgba(8,9,10,.6) 34%,
+                           rgba(8,9,10,.32) 64%, rgba(8,9,10,.52) 100%));
+}
+.ground--streak::before {
+  background:
+    repeating-linear-gradient(107deg, rgba(255,210,0,.055) 0 1px, transparent 1px 46px),
+    radial-gradient(115% 85% at 82% 14%, rgba(255,210,0,.1), transparent 58%),
+    linear-gradient(168deg, #12151b, var(--ink) 60%, #06080b);
+}
+.ground--lattice::before {
+  background:
+    radial-gradient(circle, rgba(255,210,0,.16) 0 1.4px, transparent 1.9px),
+    radial-gradient(118% 88% at 74% 26%, rgba(255,210,0,.11), transparent 60%),
+    linear-gradient(170deg, #101319, var(--ink) 62%, #06080b);
+  background-size: 32px 32px, 100% 100%, 100% 100%;
+}
 
 /* ---------- type ---------- */
 .eyebrow {
@@ -149,13 +177,10 @@ ul { list-style: none; }
 .hr { height: 1px; background: var(--hair-d); border: 0; }
 .sect--bone .hr { background: var(--hair-l); }
 
-/* section index plate — marks position in the page, mirrors the pack's data stamp */
-.plate {
-  display: inline-flex; align-items: baseline; gap: 8px;
-  font-family: var(--fm); font-size: 10.5px; letter-spacing: .2em;
-  color: var(--grey-2); text-transform: uppercase;
-}
-.plate b { color: var(--y); font-weight: 600; }
+/* The section index plate that used to live here is gone. It sat in the top-right
+   of a section header as a small grey caption, which the client could not read on
+   a photographic ground, and it was carrying no information the section headline
+   and its own content did not already give. */
 
 /* ---------- the chevron notch (signature) ---------- */
 .notch   { clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--notch)), calc(100% - var(--notch)) 100%, 0 100%); }
@@ -225,22 +250,14 @@ ul { list-style: none; }
 }
 #top-nav.stuck .nav-in { height: 66px; }
 
-/* PX98 wordmark, built in type so it stays crisp — swap for the supplied logo file */
-.mark { display: flex; align-items: center; gap: 11px; flex: none; }
-.mark-lock {
-  font-family: var(--fd); font-weight: 900; font-size: 27px; line-height: 1;
-  letter-spacing: -.03em; font-stretch: 92%; display: inline-flex; align-items: baseline;
-}
-.mark-lock .px { color: var(--white); }
-.mark-lock .n98 { color: var(--y); font-style: italic; margin-left: 1px; letter-spacing: -.05em; }
-.mark-by {
-  display: flex; flex-direction: column; gap: 1px; padding-left: 11px;
-  border-left: 1px solid var(--hair-d-2);
-}
-.mark-by span { font-family: var(--fm); font-size: 7.5px; letter-spacing: .18em; color: var(--grey-2); text-transform: uppercase; line-height: 1.35; }
-.mark-by b { font-family: var(--fm); font-size: 8.5px; font-weight: 600; letter-spacing: .2em; color: rgba(255,255,255,.72); text-transform: uppercase; line-height: 1.35; }
-.mark-by--logo { gap: 6px; }
-.mark-by--logo img { height: 26px; width: auto; }
+/* The supplied PX98 logo, built from PX98-01: white PX over the yellow 98 with the
+   black keyline the packs carry, which reads as a clean edge on this ground. It is
+   a stacked two-row lockup, so it needs more height than a single-line wordmark to
+   hold the same presence. The endorsement line that used to sit beside it has been
+   removed at the client's request. */
+.mark { display: flex; align-items: center; flex: none; }
+.mark img { height: 44px; width: auto; transition: height .45s var(--e-out); }
+#top-nav.stuck .mark img { height: 37px; }
 
 .nav-links { display: flex; align-items: center; gap: 4px; margin-left: auto; }
 .nav-links a {
@@ -282,27 +299,36 @@ ul { list-style: none; }
 }
 #drawer a span { font-family: var(--fm); font-size: 10px; letter-spacing: .2em; color: var(--y); font-weight: 500; }
 
-#scan { position: fixed; top: 0; left: 0; height: 2px; width: 0; background: var(--y); z-index: 950; }
+/* Read progress. Driven by a scroll timeline rather than a scroll listener, so the
+   browser animates it off the main thread and nothing recalculates per frame.
+   Where scroll timelines are unsupported the bar simply never shows. */
+#scan {
+  position: fixed; top: 0; left: 0; height: 2px; width: 100%; background: var(--y); z-index: 950;
+  transform: scaleX(0); transform-origin: 0 50%;
+}
+@supports (animation-timeline: scroll()) {
+  #scan { animation: scan-progress linear both; animation-timeline: scroll(root block); }
+  @keyframes scan-progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+}
 
 /* ============================================================
    HERO
    ============================================================ */
 /* bottom padding keeps the grade rail clear of the fixed corner widgets */
 #hero { position: relative; min-height: 100svh; display: flex; align-items: flex-end; padding: 96px 0 62px; overflow: hidden; background: var(--ink); }
-/* taller than the hero so the scroll parallax never exposes an edge */
-.hero-field { position: absolute; inset: -14% 0; z-index: 0; overflow: hidden; will-change: transform; }
+/* The scroll parallax that used to live here is gone with the photograph. Nothing
+   in the hero is driven by scroll position now, so no scroll listener is needed. */
+.hero-field { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
 
-/* supplied hero photograph, held to the right so the headline keeps clean ground */
-.hero-photo {
+/* The hero photograph is gone. It was a 740px-wide file stretched across a
+   full-bleed hero, which is what the client saw as blur. The pack group is the
+   subject now, standing on the label's own warm light bands. */
+.hero-ground {
   position: absolute; inset: 0;
-  background: url("../img/hero-bg.jpeg") center right / cover no-repeat;
-  filter: contrast(1.04) saturate(1.08) brightness(.92);
-  transform: scale(1.03); will-change: transform;
-  animation: heroDrift 26s ease-in-out infinite alternate;
-}
-@keyframes heroDrift {
-  from { transform: scale(1.03) translate3d(0, 0, 0); }
-  to   { transform: scale(1.1) translate3d(-1.6%, -1%, 0); }
+  background:
+    repeating-linear-gradient(107deg, rgba(255,210,0,.06) 0 1px, transparent 1px 52px),
+    radial-gradient(105% 80% at 74% 16%, rgba(255,210,0,.13), transparent 60%),
+    linear-gradient(166deg, #14181f, var(--ink) 58%, #05070a);
 }
 
 /* left-weighted: enough ink under the headline, then it opens right up so the car reads */
@@ -419,6 +445,9 @@ ul { list-style: none; }
 .stat-n { font-family: var(--fd); font-weight: 900; font-stretch: 84%; font-style: italic;
   font-size: clamp(44px, 5vw, 70px); line-height: .9; letter-spacing: -.035em; color: var(--ink); }
 .stat-n sup { font-size: .44em; vertical-align: super; color: var(--y-deep); font-style: normal; }
+/* One of the four tiles carries a phrase rather than a figure, so it needs its own
+   size: at the numeral scale "Europe to Asia" would not fit the column. */
+.stat-n--t { font-size: clamp(24px, 2.4vw, 34px); line-height: 1.05; letter-spacing: -.02em; }
 .stat-k { font-family: var(--fm); font-size: 10.5px; letter-spacing: .19em; text-transform: uppercase; color: var(--grey-2); margin-top: 10px; }
 .stat-d { font-size: 13.5px; color: #5c6268; margin-top: 6px; line-height: 1.5; max-width: 26ch; }
 
@@ -428,6 +457,17 @@ ul { list-style: none; }
 .split { display: grid; grid-template-columns: minmax(0,.9fr) minmax(0,1.1fr); gap: clamp(36px, 6vw, 88px); align-items: center; }
 .split--rev .split-a { order: 2; }
 .split-head { max-width: 46ch; }
+
+/* ---------- stacked wide figure ----------
+   For an image that carries its own labelling and has to be read, not glanced at.
+   The client's sustainability diagram is 3:2 with five callouts in it; in a split
+   column its type would land under 9px. Headline and copy go above, full width
+   below, which also breaks the run of left-image / right-text splits. */
+.stack-fig { display: grid; gap: clamp(30px, 4vw, 52px); }
+.stack-fig-head { display: grid; gap: 20px; max-width: 72ch; }
+.stack-fig figure { margin: 0; max-width: 1080px; width: 100%; }
+.stack-fig img { width: 100%; height: auto; }
+.stack-fig .ph { max-width: 1080px; }
 
 .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(255px, 1fr)); gap: 1px; background: var(--hair-d); border: 1px solid var(--hair-d); }
 .card {
@@ -441,7 +481,10 @@ ul { list-style: none; }
 }
 .card:hover { background: var(--ink-2); }
 .card:hover::after { transform: scaleX(1); }
-.card-tag { font-family: var(--fm); font-size: 9.5px; letter-spacing: .22em; text-transform: uppercase; color: var(--y); margin-bottom: 26px; display: block; }
+/* The tag reads at a distance now. At 9.5px with .22em tracking the client could
+   not make these out against the card. */
+.card-tag { font-family: var(--fm); font-size: 10.5px; font-weight: 500; letter-spacing: .15em;
+  line-height: 1.5; text-transform: uppercase; color: var(--y); margin-bottom: 22px; display: block; }
 .card-icon { width: 34px; height: 34px; margin-bottom: 20px; stroke: var(--y); fill: none; stroke-width: 1.3; }
 .card h3 { font-family: var(--fd); font-weight: 700; font-stretch: 90%; text-transform: uppercase; font-size: 19px; line-height: 1.12; margin-bottom: 12px; letter-spacing: -.005em; }
 .card p { font-size: 14px; line-height: 1.62; color: rgba(255,255,255,.56); }
@@ -452,6 +495,26 @@ ul { list-style: none; }
 .sect--bone .card-tag { color: var(--slate); }
 .sect--bone .card-icon { stroke: var(--ink); }
 .sect--bone .card p { color: #5c6268; }
+
+/* ---------- grouped capability rows ----------
+   Replaces the nine-chip cluster the client rejected on the home page. Nine flat
+   items want grouping, not nine hairlines: three clusters, one rule each, so the
+   eye lands on the argument instead of counting tags. */
+.spec-groups { display: grid; }
+.spec-group { border-top: 1px solid var(--hair-d); padding-top: 17px; margin-top: 20px; }
+.spec-group:first-child { margin-top: 0; }
+.spec-group dt {
+  font-family: var(--fm); font-size: 10px; font-weight: 500; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--y); margin-bottom: 11px;
+}
+.spec-group dd { display: grid; gap: 7px; }
+.spec-group li { position: relative; padding-left: 17px; font-size: 14px; line-height: 1.5; color: rgba(255,255,255,.72); }
+.spec-group li::before {
+  content: ''; position: absolute; left: 0; top: .6em; width: 8px; height: 1.5px; background: var(--y-deep);
+}
+.sect--bone .spec-group { border-color: var(--hair-l); }
+.sect--bone .spec-group dt { color: var(--slate); }
+.sect--bone .spec-group li { color: #4d5359; }
 
 /* chip list — technology highlights, brake specs, benefits */
 .chips { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -488,8 +551,11 @@ ul { list-style: none; }
 .ph-label span { display: block; font-family: var(--fm); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--grey-2); margin-top: 8px; }
 .ph--16x9 { aspect-ratio: 16/9; }
 .ph--4x3 { aspect-ratio: 4/3; }
-.ph--1x1 { aspect-ratio: 1; }
-.ph--3x4 { aspect-ratio: 3/4; }
+
+/* supplied photography, filling slots the placeholders used to hold */
+.shot-img { width: 100%; height: auto; object-fit: cover; background: var(--ink-2); }
+.shot-img--4x3 { aspect-ratio: 4/3; }
+.shot-img--3x2 { aspect-ratio: 3/2; }
 .sect--bone .ph { background: var(--bone-2); box-shadow: inset 0 0 0 1px var(--hair-l);
   background-image: repeating-linear-gradient(-45deg, rgba(8,9,10,.045) 0 1px, transparent 1px 9px); }
 .sect--bone .ph-label b { color: var(--slate); }
@@ -515,7 +581,7 @@ ul { list-style: none; }
 .rcard:hover::before { transform: scaleX(1); }
 /* flex + max-height, not grid + height:100% — a centred grid item auto-sizes its
    track, which leaves a percentage height indefinite and the pack overflows */
-.rcard-shot { height: 168px; display: flex; align-items: center; justify-content: center; margin: 6px 0 20px; }
+.rcard-shot { height: 176px; display: flex; align-items: center; justify-content: center; margin: 6px 0 20px; }
 .rcard-shot img { max-height: 100%; width: auto; object-fit: contain; filter: drop-shadow(0 16px 26px rgba(0,0,0,.6));
   transition: transform .6s var(--e-out); }
 .rcard:hover .rcard-shot img { transform: translateY(-7px) scale(1.04); }
@@ -540,7 +606,6 @@ ul { list-style: none; }
 }
 .filter:hover { color: var(--white); box-shadow: inset 0 0 0 1px var(--hair-d-2); }
 .filter[aria-pressed="true"] { background: var(--y); color: #000; box-shadow: none; }
-.filter b { font-weight: 500; opacity: .55; margin-left: 7px; }
 
 .search { position: relative; }
 .search input {
@@ -570,19 +635,28 @@ ul { list-style: none; }
 .pcard-cat { font-family: var(--fm); font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: var(--grey-2); }
 .pcard-euro { font-family: var(--fm); font-size: 8.5px; letter-spacing: .16em; text-transform: uppercase;
   color: #000; background: var(--y); padding: 3px 7px; white-space: nowrap; }
-.pcard-shot { height: 150px; display: flex; align-items: center; justify-content: center; margin: 12px 0 14px; }
+/* Taller than before so the approved label artwork is actually readable in the grid */
+.pcard-shot { height: 184px; display: flex; align-items: center; justify-content: center; margin: 14px 0 16px; }
 .pcard-shot img { max-height: 100%; width: auto; object-fit: contain; filter: drop-shadow(0 14px 22px rgba(0,0,0,.55)); transition: transform .55s var(--e-out); }
-.pcard:hover .pcard-shot img { transform: scale(1.06) translateY(-5px); }
+.pcard:hover .pcard-shot img { transform: scale(1.05) translateY(-4px); }
 .pcard-grade { font-family: var(--fd); font-weight: 900; font-style: italic; font-stretch: 82%;
   font-size: 30px; line-height: .95; letter-spacing: -.035em; color: var(--y); }
 .pcard-grade.na { font-size: 20px; color: var(--white); font-style: normal; font-weight: 800; }
 .pcard-name { font-family: var(--fd); font-weight: 700; font-stretch: 92%; text-transform: uppercase;
-  font-size: 15px; line-height: 1.14; margin: 7px 0 10px; color: var(--white); }
-.pcard-spec { font-family: var(--fm); font-size: 10px; letter-spacing: .08em; color: var(--grey);
-  line-height: 1.65; border-top: 1px solid var(--hair-d); padding-top: 11px; margin-top: auto; }
-.pcard-spec b { color: rgba(255,255,255,.8); font-weight: 500; }
+  font-size: 15px; line-height: 1.14; margin: 7px 0 3px; color: var(--white); }
+/* the performance designation, on its own line under the series name */
+.pcard-var { font-family: var(--fd); font-weight: 700; font-stretch: 92%; text-transform: uppercase;
+  font-size: 13px; line-height: 1.2; color: rgba(255,255,255,.6); margin-bottom: 14px; }
 
-/* CSS pack plate — stands in where label artwork is not supplied yet */
+/* Base type and performance level, labelled. They used to run together as one
+   unlabelled mono block, which the client could not read as two separate facts. */
+.pcard-meta { margin-top: auto; border-top: 1px solid var(--hair-d); padding-top: 12px; display: grid; gap: 9px; }
+.pcard-meta dt { font-family: var(--fm); font-size: 9px; letter-spacing: .17em; text-transform: uppercase; color: var(--grey-2); }
+.pcard-meta dd { font-size: 12.5px; line-height: 1.45; color: rgba(255,255,255,.82); margin-top: 3px; }
+
+/* CSS pack plate. Twenty-nine of the thirty-six products now carry their approved
+   label artwork; this stands in for the seven that have none yet: 4X4 DIESEL POWER
+   15W-40, SHIFT FORCE 9HP PRO, the three coolants and the two engine treatments. */
 .plate-pack {
   position: relative; width: 96px; height: 150px; background: linear-gradient(155deg, #1d2126, #0b0d0f 70%);
   box-shadow: inset 0 0 0 1px var(--hair-d-2); border-radius: 5px 5px 3px 3px; overflow: hidden;
@@ -610,6 +684,18 @@ ul { list-style: none; }
 }
 .pd-stage img { height: clamp(280px, 42vh, 430px); width: auto; filter: drop-shadow(0 32px 44px rgba(0,0,0,.7)); }
 .pd-stage .plate-pack { width: 190px; height: 300px; }
+
+/* ---------- two pack stages side by side ----------
+   Built for the diesel comparison the client asked for: 4X4 TURBO POWER in 5W-30
+   and 10W-40, both carrying their own approved label. */
+.two-up { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.two-up .pd-stage { padding: 30px 16px; --notch: 22px; }
+.two-up .pd-stage img { height: clamp(190px, 26vh, 290px); }
+.two-up figure { display: flex; flex-direction: column; gap: 12px; margin: 0; }
+.two-up figcaption { font-family: var(--fm); font-size: 10px; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--grey); }
+.two-up figcaption b { display: block; font-family: var(--fd); font-size: 21px; font-weight: 900;
+  font-style: italic; font-stretch: 82%; letter-spacing: -.03em; color: var(--y); margin-bottom: 4px; }
 .pd-grade { font-family: var(--fd); font-weight: 900; font-style: italic; font-stretch: 80%;
   font-size: clamp(44px, 6vw, 82px); line-height: .9; letter-spacing: -.04em; color: var(--y); margin: 4px 0 6px; }
 .pd h1 { font-family: var(--fd); font-weight: 800; font-stretch: 88%; text-transform: uppercase;
@@ -678,6 +764,10 @@ ul { list-style: none; }
 footer { background: var(--ink-1); border-top: 1px solid var(--hair-d); padding-top: 72px; }
 .foot-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 56px; }
 .foot-about p { font-size: 13.5px; line-height: 1.7; color: rgba(255,255,255,.5); max-width: 34ch; margin-top: 22px; }
+/* The footer endorses the parent company, so it carries the Prince mark on its
+   own. The PX98 lockup that used to sit beside it has been removed. */
+.foot-mark { display: inline-block; }
+.foot-mark img { height: 44px; width: auto; }
 .foot-col h4 { font-family: var(--fm); font-size: 9.5px; letter-spacing: .22em; text-transform: uppercase; color: var(--y); margin-bottom: 20px; }
 .foot-col li { margin-bottom: 11px; }
 .foot-col a { font-size: 13.5px; color: rgba(255,255,255,.6); transition: color .28s, padding-left .35s var(--e-out); display: inline-block; }
@@ -903,4 +993,7 @@ footer { background: var(--ink-1); border-top: 1px solid var(--hair-d); padding-
   [data-rv] { opacity: 1 !important; transform: none !important; }
   .mask > span { transform: none !important; }
   #wipe { display: none; }
+  /* the blanket animation-duration override above would collapse a scroll-timeline
+     animation to its end state, so the progress bar is withdrawn instead */
+  #scan { display: none; }
 }

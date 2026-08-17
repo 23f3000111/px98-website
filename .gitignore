@@ -10,3 +10,15 @@ __MACOSX/
 .playwright-mcp/
 *.log
 node_modules/
+
+# Client source material. Print artwork, layered files and review decks, around
+# 90MB of it. The web-ready cuts live in assets/img/labels/ and are committed;
+# these originals stay out of the repo. A plain `git add -A` sweeps them in
+# otherwise.
+#
+# Deliberately not a blanket *.pdf rule: product datasheets are the kind of thing
+# this site will want to serve, and those belong in the repo.
+Prince Label/
+*.ai
+*.psd
+px98 website amendment*.pdf

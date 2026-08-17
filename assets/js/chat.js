@@ -2,7 +2,7 @@
    PX98 Assistant
    A two-way product finder that answers against the real catalogue:
    viscosity grades, OEM approvals, industry specs, applications.
-   Runs entirely in the page — no backend, no keys. Swap `reply()`
+   Runs entirely in the page, no backend and no keys. Swap `reply()`
    for a server call when a live model is wired up.
    ============================================================ */
 (function () {
@@ -84,7 +84,7 @@
 
   function finderResult(a) {
     if (a.use === 'truck') {
-      return { text: 'For commercial diesel, these are the fleet oils — low-SAPS chemistry that protects DPF, DOC and SCR systems.',
+      return { text: 'For commercial diesel, these are the fleet oils. Low-SAPS chemistry protects DPF, DOC and SCR systems.',
                hits: byCat('diesel') };
     }
     if (a.use === 'service') {
@@ -123,7 +123,7 @@
     if (g.length) {
       var hits = byGrade(g[0]);
       return hits.length
-        ? { text: 'SAE ' + g[0] + ' — ' + hits.length + (hits.length === 1 ? ' product' : ' products') + ' in the range:', hits: hits }
+        ? { text: 'SAE ' + g[0] + ': ' + hits.length + (hits.length === 1 ? ' product' : ' products') + ' in the range:', hits: hits }
         : { text: 'Nothing in the range is blended to SAE ' + g[0] + ' yet. The engine oil ladder runs 0W-20 through 20W-50.',
             chips: ['0W-20', '5W-30', '10W-40', 'Find my oil'] };
     }
@@ -166,12 +166,12 @@
     }
     if (/open distributor form/.test(t)) { window.location.href = 'distributors.html'; return { text: 'Opening the distributor form.' }; }
     if (/contact|email|phone|call|reach|address|talk to a person|human/.test(t)) {
-      return { text: 'The export team in Singapore handles product, technical and distribution enquiries. The <a href="contact.html">contact page</a> has the form — contact details are placeholder in this mockup.',
+      return { text: 'The export team in Singapore handles product, technical and distribution enquiries. The <a href="contact.html">contact page</a> has the form. Contact details are placeholder in this mockup.',
                chips: ['Open contact form', 'Find my oil'] };
     }
     if (/open contact form/.test(t)) { window.location.href = 'contact.html'; return { text: 'Opening the contact form.' }; }
     if (/who|about|prince|singapore|company|1998/.test(t)) {
-      return { text: 'PX98 is a premium automotive lubricant brand developed by <b>PRINCE GLOBAL PTE. LTD.</b>, Singapore — performance excellence since 1998. Thirty-six products across six fluid families.',
+      return { text: 'PX98 is a premium automotive lubricant brand developed by <b>PRINCE GLOBAL PTE. LTD.</b>, Singapore. Performance excellence since 1998, across six fluid families.',
                chips: ['What is the product range?', 'Technology'] };
     }
     if (/technolog|additive|base oil|molecular|saps|synthetic/.test(t)) {
@@ -183,7 +183,7 @@
                hits: byText('Low SAPS') };
     }
     if (/range|catalogue|catalog|products|how many/.test(t)) {
-      return { text: 'Six families: passenger car engine oils, commercial diesel, automatic transmission fluids, gear oils, coolants and service fluids. Thirty-six products in total.',
+      return { text: 'Six families: passenger car engine oils, commercial diesel, automatic transmission fluids, gear oils, coolants and service fluids.',
                chips: ['Passenger car', 'Diesel', 'Transmission', 'Coolants'] };
     }
     if (/thank|thanks|cheers|ok|great/.test(t)) {
@@ -213,8 +213,10 @@
   function hitHTML(p) {
     var grade = p.grade ? p.grade.replace('SAE ', '') : (p.variant || 'Fluid');
     var label = p.name.replace('PX98 ', '').replace(p.grade, '').replace(/\s{2,}/g, ' ').trim();
-    var art = p.shot
-      ? '<img src="assets/img/packs/' + p.shot + '" alt="">'
+    /* approved label artwork where it exists, same resolver the catalogue uses */
+    var src = window.PX98_labelSrc ? window.PX98_labelSrc(p.id) : null;
+    var art = src
+      ? '<img src="' + src + '" alt="">'
       : '<span class="chat-hit-fallback"></span>';
     return '<a class="chat-hit" href="product.html?id=' + encodeURIComponent(p.id) + '">' +
       '<span class="chat-hit-img">' + art + '</span>' +
@@ -268,9 +270,11 @@
     if (res.chips) push({ who: 'chips', chips: res.chips });
   }
 
+  /* what gets persisted to sessionStorage for a result row. The pack image is
+     resolved from the id now, so the old shot filename is no longer carried. */
   function slim(p) {
     return { id: p.id, name: p.name, grade: p.grade, variant: p.variant,
-             industry: p.industry, base: p.base, type: p.type, shot: p.shot };
+             industry: p.industry, base: p.base, type: p.type };
   }
 
   function thinking(fn) {
@@ -367,7 +371,7 @@
           '<svg viewBox="0 0 16 9" aria-hidden="true"><path d="M0 4.5h13M9.5 1l3.5 3.5L9.5 8" stroke="currentColor" stroke-width="1.6" fill="none"/></svg>' +
         '</button>' +
       '</form>' +
-      '<div class="chat-foot">Mockup assistant — searches the 36-product catalogue on this device</div>';
+      '<div class="chat-foot">Mockup assistant. Searches the catalogue on this device.</div>';
     document.body.appendChild(panel);
 
     log = panel.querySelector('#chat-log');
@@ -390,7 +394,7 @@
       history.forEach(render);
       if (saved.open) open(true);
     } else {
-      push({ who: 'bot', text: 'Hi — I am the PX98 product assistant. Tell me the viscosity grade, the approval from your manual, or the vehicle, and I will find the right fluid.' }, true);
+      push({ who: 'bot', text: 'Hi, I am the PX98 product assistant. Tell me the viscosity grade, the approval from your manual, or the vehicle, and I will find the right fluid.' }, true);
       push({ who: 'chips', chips: ['Find my oil', '0W-20', 'Fluid for a BMW', 'Become a distributor'] });
     }
   }

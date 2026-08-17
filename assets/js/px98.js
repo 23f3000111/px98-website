@@ -1,5 +1,5 @@
 /* ============================================================
-   PX98 — site behaviour
+   PX98 site behaviour
    No build step, no libraries, runs straight off the filesystem.
    ============================================================ */
 (function () {
@@ -37,16 +37,12 @@
   /* ---------------------------------------------------------
      Shared chrome
      --------------------------------------------------------- */
-  /* variant 'type' keeps the endorsement legible at nav scale; 'logo' uses the
-     supplied Prince mark where there is room for it to read. */
-  function mark(variant) {
-    var by = variant === 'logo'
-      ? '<span class="mark-by mark-by--logo"><span>Another brand by</span>' +
-          '<img src="assets/img/brand/prince-logo.png" alt="Prince Lubricants"></span>'
-      : '<span class="mark-by"><span>Another</span><span>brand by</span><b>Prince</b></span>';
+  /* The supplied PX98 logo, on its own. The "Another brand by Prince" line that
+     used to sit beside it has been removed at the client's request; the parent
+     company is endorsed in the footer instead. */
+  function mark() {
     return '<a class="mark" href="index.html" aria-label="PX98 home">' +
-             '<span class="mark-lock"><span class="px">PX</span><span class="n98">98</span></span>' +
-             by +
+             '<img src="assets/img/brand/px98-logo.png" alt="PX98" width="161" height="132">' +
            '</a>';
   }
 
@@ -56,7 +52,7 @@
     host.innerHTML =
       '<div id="scan"></div>' +
       '<header id="top-nav"><div class="nav-in">' +
-        mark('type') +
+        mark() +
         '<nav class="nav-links" aria-label="Primary">' +
           NAV.map(function (n) {
             return '<a href="' + n.href + '"' + (n.key === page ? ' aria-current="page"' : '') + '>' + n.label + '</a>';
@@ -78,8 +74,9 @@
     host.innerHTML =
       '<footer><div class="wrap">' +
         '<div class="foot-grid">' +
-          '<div class="foot-about">' + mark('logo') +
-            '<p>PX98 is a premium automotive lubricant brand proudly developed by PRINCE GLOBAL PTE. LTD., Singapore.</p>' +
+          '<div class="foot-about">' +
+            '<span class="foot-mark"><img src="assets/img/brand/prince-logo.png" alt="Prince Lubricants" width="314" height="128"></span>' +
+            '<p>PX98 represents a new generation of premium automotive lubricants developed by PRINCE GLOBAL PTE. LTD.</p>' +
           '</div>' +
           '<div class="foot-col"><h4>Products</h4><ul>' +
             '<li><a href="products.html?cat=pcmo">Passenger Car Engine Oils</a></li>' +
@@ -101,7 +98,7 @@
           '</ul></div>' +
         '</div>' +
         '<div class="foot-base">' +
-          '<p>&copy; ' + new Date().getFullYear() + ' Prince Global Pte. Ltd. — Performance excellence since 1998</p>' +
+          '<p>&copy; ' + new Date().getFullYear() + ' Prince Global Pte. Ltd. \u00b7 Performance excellence since 1998</p>' +
           '<div class="foot-social">' +
             '<a href="#" aria-label="Facebook">FB</a>' +
             '<a href="#" aria-label="Instagram">IG</a>' +
@@ -112,34 +109,37 @@
       '</div></footer>' +
       '<button id="totop" aria-label="Back to top"><svg viewBox="0 0 16 9" aria-hidden="true"><path d="M0 4.5h13M9.5 1l3.5 3.5L9.5 8" stroke="currentColor" stroke-width="1.6" fill="none"/></svg></button>' +
       '<aside id="mock-note"><button aria-label="Dismiss">&times;</button>' +
-        '<b>Presentation mockup</b> Pack shots are the approved PX98 label artwork. Photography is placeholder.' +
+        '<b>Presentation mockup</b> Packs are the approved PX98 label artwork. Automotive photography is still to be licensed.' +
       '</aside>';
   }
 
   /* ---------------------------------------------------------
      Behaviour
      --------------------------------------------------------- */
-  function chrome() {
-    var nav = $('#top-nav'), scan = $('#scan'), totop = $('#totop');
-    var burger = $('#burger'), drawer = $('#drawer'), note = $('#mock-note');
-    var heroField = REDUCED ? null : $('#heroField');
+  /* Watches a zero-height marker parked at a given depth down the page and flips a
+     class when it leaves the top of the viewport. The browser reports the crossing
+     itself, so nothing runs per scroll frame. */
+  function depthGate(depth, apply) {
+    var pin = document.createElement('span');
+    pin.setAttribute('aria-hidden', 'true');
+    pin.style.cssText = 'position:absolute;top:' + depth + 'px;left:0;width:1px;height:1px;pointer-events:none';
+    document.body.appendChild(pin);
+    new IntersectionObserver(function (entries) {
+      apply(entries[0].boundingClientRect.top < 0);
+    }, { threshold: 0 }).observe(pin);
+  }
 
-    function onScroll() {
-      var y = window.scrollY;
-      if (nav) nav.classList.toggle('stuck', y > 24);
-      if (totop) totop.classList.toggle('on', y > 640);
-      if (note) note.classList.toggle('on', y > 220);
-      if (heroField && y < window.innerHeight * 1.3) {
-        // the field is 128% of the hero, so 130px of lag never exposes an edge
-        heroField.style.transform = 'translate3d(0,' + Math.min(y * 0.22, 130) + 'px,0)';
-      }
-      if (scan) {
-        var max = document.documentElement.scrollHeight - window.innerHeight;
-        scan.style.width = (max > 0 ? (y / max) * 100 : 0) + '%';
-      }
-    }
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
+  function chrome() {
+    var nav = $('#top-nav'), totop = $('#totop');
+    var burger = $('#burger'), drawer = $('#drawer'), note = $('#mock-note');
+
+    /* The nav condense, the back-to-top button and the mockup badge used to share a
+       scroll listener that also drove the hero parallax and the progress bar. The
+       parallax went with the hero photograph and the progress bar is a CSS scroll
+       timeline now, so all that is left are three depth thresholds. */
+    if (nav) depthGate(24, function (on) { nav.classList.toggle('stuck', on); });
+    if (note) depthGate(220, function (on) { note.classList.toggle('on', on); });
+    if (totop) depthGate(640, function (on) { totop.classList.toggle('on', on); });
 
     if (burger && drawer) {
       burger.addEventListener('click', function () {
@@ -234,8 +234,12 @@
     var host = $('#grade-rail');
     if (!host) return;
     var grades = ['0W-20', '0W-30', '5W-30', '5W-40', '5W-50', '10W-30', '10W-40', '15W-40', '20W-50'];
-    var notes  = ['Hybrid / GDI', 'Euro + JDM', 'Universal', 'Turbo', 'High output',
-                  'Fleet diesel', 'High mileage', 'Mixed fleet', 'Severe heat'];
+    /* 5W-30, 5W-40 and 20W-50 carry the wording the client specified. Two of those
+       collided with labels already in the rail: 20W-50 took "high-mileage" off
+       10W-40, and "modern GDI" on 5W-30 echoed "hybrid / GDI" on 0W-20. The two
+       displaced notes are re-cut against what each grade actually covers. */
+    var notes  = ['Hybrid / HEV', 'Euro + JDM', 'Modern GDI', 'Turbocharged', 'High output',
+                  'Fleet diesel', 'Long haul', 'Mixed fleet', 'High-mileage'];
 
     function steps() {
       return grades.map(function (g, i) {
@@ -291,27 +295,60 @@
   /* ---------------------------------------------------------
      Catalogue
      --------------------------------------------------------- */
-  function packShot(p, cls) {
-    if (p.shot) {
-      return '<img src="assets/img/packs/' + p.shot + '" alt="' + esc(p.name) + '" loading="lazy">';
+  /* Products whose approved label artwork the client has supplied. The file is always
+     assets/img/labels/<id>.webp, so the id is the whole mapping. Seven of the
+     thirty-six have no artwork yet and fall through to the CSS plate. */
+  var LABELLED = {};
+  ['eco-power-sae-0w-20-sp-rc-gf-6a', 'eco-power-sae-0w-30-sp-rc-gf-6a',
+   'eco-power-sae-5w-30-sp-rc-gf-6a', 'turbo-power-sae-5w-40-sp', 'turbo-power-sae-5w-50-sp',
+   'advan-power-sae-5w-30-sp-rc-gf-6a', 'advan-power-sae-10w-40-sp',
+   'advan-blend-sae-10w-30-sn-cf', 'advan-blend-sae-15w-40-sn-cf', 'advan-blend-sae-20w-50-sl-cf',
+   '4x4-turbo-power-sae-5w-30-ck-4-sn', '4x4-turbo-power-sae-10w-40-ck-4-sn',
+   '4x4-diesel-power-sae-10w-30-cj-4-sn', '4x4-diesel-power-sae-10w-40-cj-4-sn',
+   'shift-force-manual-sae-75w-90-gl-4', 'shift-force-manual-sae-80w-90-gl-4',
+   'shift-force-limited-slip-axle-gear-sae-80w-90-gl-5',
+   'shift-force-limited-slip-differential-gear-sae-85w-90-gl-5',
+   'shift-force-hypoid-gear-sae-90-gl-5', 'shift-force-ep-manual-sae-140-gl-4',
+   'shift-force-atf-lv', 'shift-force-atf-mv', 'shift-force-atf-dw-1', 'shift-force-atf-ws',
+   'shift-force-ammix-d3-sp', 'shift-force-dctf', 'shift-force-cvtf',
+   'super-dot-4-brake-fluid', 'modern-dot-5-1-brake-fluid'
+  ].forEach(function (id) { LABELLED[id] = 1; });
+
+  function labelSrc(id) { return 'assets/img/labels/' + id + '.webp'; }
+
+  /* The assistant renders its own result rows, so it needs the same answer about
+     which products have artwork. One resolver, both callers. */
+  window.PX98_labelSrc = function (id) { return LABELLED[id] ? labelSrc(id) : null; };
+
+  function packShot(p) {
+    if (LABELLED[p.id]) {
+      return '<img class="label-art" src="' + labelSrc(p.id) + '" alt="' + esc(p.name) +
+             ' label artwork" loading="lazy">';
     }
     var band = esc(p.family || p.type);
-    return '<div class="plate-pack" role="img" aria-label="' + esc(p.name) + ' pack — artwork pending">' +
+    return '<div class="plate-pack" role="img" aria-label="' + esc(p.name) + ' pack, artwork pending">' +
              '<div class="plate-pack-mark"><span class="px">PX</span><span class="n98">98</span></div>' +
              '<div class="plate-pack-band">' + band + '</div>' +
            '</div>';
   }
 
+  /* Card order is the client's: grade on top, then the series name carrying its
+     viscosity, then the performance designation, then base type and performance
+     level as two labelled facts rather than one run-together mono block. */
   function pcard(p) {
     var grade = p.grade ? p.grade.replace('SAE ', '') : '';
+    var series = p.family ? (p.family + (p.grade ? ' ' + p.grade : '')) : p.name.replace('PX98 ', '');
     return '<a class="pcard" href="product.html?id=' + encodeURIComponent(p.id) + '">' +
       '<div class="pcard-top"><span class="pcard-cat">' + esc(p.type) + '</span>' +
         (p.euro ? '<span class="pcard-euro">Euro spec</span>' : '') + '</div>' +
       '<div class="pcard-shot">' + packShot(p) + '</div>' +
       '<div class="pcard-grade' + (grade ? '' : ' na') + '">' + esc(grade || p.variant || 'Fluid') + '</div>' +
-      '<div class="pcard-name">' + esc(p.name.replace('PX98 ', '')) + '</div>' +
-      '<div class="pcard-spec"><b>' + esc(p.base || '—') + '</b><br>' +
-        esc((p.industry || '—').split(',').slice(0, 3).join(' · ')) + '</div>' +
+      '<div class="pcard-name">' + esc(series) + '</div>' +
+      (p.variant ? '<div class="pcard-var">' + esc(p.variant) + '</div>' : '') +
+      '<dl class="pcard-meta">' +
+        '<div><dt>Base type</dt><dd>' + esc(p.base || 'To be confirmed') + '</dd></div>' +
+        '<div><dt>Performance level</dt><dd>' + esc(p.industry || 'To be confirmed') + '</dd></div>' +
+      '</dl>' +
     '</a>';
   }
 
@@ -326,13 +363,14 @@
       q: params.get('q') || ''
     };
 
+    /* Product counts have come off the filters at the client's request, here and on
+       the home range cards. */
     var bar = $('#filters');
     if (bar) {
       bar.innerHTML =
-        '<button class="filter" data-cat="all">All<b>' + all.length + '</b></button>' +
+        '<button class="filter" data-cat="all">All</button>' +
         CATS.map(function (c) {
-          var n = all.filter(function (p) { return p.cat === c.key; }).length;
-          return '<button class="filter" data-cat="' + c.key + '">' + c.label + '<b>' + n + '</b></button>';
+          return '<button class="filter" data-cat="' + c.key + '">' + c.label + '</button>';
         }).join('');
       $$('.filter', bar).forEach(function (b) {
         b.addEventListener('click', function () {
@@ -363,10 +401,14 @@
         b.setAttribute('aria-pressed', String(b.dataset.cat === state.cat && !state.grade));
       });
 
+      /* Where the total used to sit. It names what is being shown instead of how
+         many, so the row still orients the reader without printing a figure. */
       var count = $('#pcount');
       if (count) {
-        count.textContent = list.length + (list.length === 1 ? ' product' : ' products') +
-          (state.grade ? ' · SAE ' + state.grade : '');
+        var label = state.grade ? 'SAE ' + state.grade
+                  : state.cat !== 'all' ? (CATS.filter(function (c) { return c.key === state.cat; })[0] || {}).label
+                  : '';
+        count.textContent = label ? 'Showing ' + label : '';
       }
 
       grid.innerHTML = list.length
@@ -389,7 +431,7 @@
     var all = window.PX98_PRODUCTS;
     var p = all.filter(function (x) { return x.id === id; })[0] || all[0];
 
-    document.title = p.name + ' — PX98';
+    document.title = p.name + ' - PX98';
     var crumb = $('#pd-crumb');
     if (crumb) crumb.textContent = p.catLabel;
 
@@ -398,7 +440,7 @@
       '<div class="pd-shot" data-rv="l">' +
         '<div class="pd-stage">' + packShot(p) + '</div>' +
         '<div class="mono" style="margin-top:14px;font-size:9.5px">' +
-          (p.exactArt ? 'Approved label artwork' : 'Representative pack — artwork in production') +
+          (p.exactArt ? 'Approved label artwork' : 'Representative pack, artwork in production') +
         '</div>' +
       '</div>' +
       '<div class="pd-body" data-rv>' +
@@ -428,7 +470,7 @@
   }
 
   /* ---------------------------------------------------------
-     Forms — mockup only, nothing is sent anywhere
+     Forms: mockup only, nothing is sent anywhere
      --------------------------------------------------------- */
   function forms() {
     $$('form[data-mock]').forEach(function (f) {
@@ -437,7 +479,7 @@
         var btn = $('button[type=submit]', f);
         if (!btn) return;
         var was = btn.innerHTML;
-        btn.innerHTML = '<span>Received — this is a mockup</span>';
+        btn.innerHTML = '<span>Received. This is a mockup.</span>';
         setTimeout(function () { btn.innerHTML = was; }, 2600);
       });
     });
