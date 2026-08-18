@@ -59,15 +59,65 @@ artwork itself.
 - **Product data** lives in `assets/js/products.js` and was generated from the client's
   `PX98 website - products.docx`. Regenerate rather than hand-editing if the deck changes.
   The label mapping is deliberately kept out of this file so it stays regenerable.
-- **Automotive photography is the one outstanding asset.** Four sections asked for a car
-  and have none. They run on a drawn brand ground instead, each marked with a `TODO` in
-  the markup naming the crop needed: the home hero, home `#performance`, and the page
-  headers on `technology.html`, `products.html` and `contact.html`. To restore a
-  photograph, swap `sect--ground ground--streak` (or `ground--lattice`) back to
-  `sect--photo`, add a `.shot--*` rule in the stylesheet, and set `--shot-pos`.
-- **The four supplied photographs** are `lab-viscometer.jpg`, `engine-pour.jpg`,
-  `diesel-pickup.jpg` and `sustainability-engine.jpg`. `engine-pour.jpg` was darkened to
-  82% brightness on request.
+- **Automotive photography.** The client supplied five car shots on 17 Aug 2026
+  (`Sample Images/`). They are downsampled to 2000px JPEGs in `assets/img/` and wired up:
+
+  | Where | File | Source |
+  | --- | --- | --- |
+  | home `#tech` | `tech-supra-city.jpg` | `kl_2026_supra_city_drive.png` |
+  | home `#performance` | `performance-racecar-98.jpg` | `mountain_highway_racecar_98.png` |
+  | home `#distributor` | `distribution-supercar.jpg` | `supercar_recreated_highres.png` |
+  | `about.html` header | `about-supercar-98.jpg` | `yellow_supercar_right_facing_98.png` |
+  | `technology.html` header | `technology-supra.jpg` | `kl_supra_dramatic_speed_scene.png` |
+  | `products.html` header | `products-supercar.jpg` | `coastal_mountain_supercar_scene.png` |
+
+  Section grounds still take a photograph the same way: `sect--photo` plus a `.shot--*`
+  rule holding the `url()`, then `--shot-pos` and `--shot-fade` on the section itself.
+  The two home-page panels are framed `<img>` in a `.split` rather than a bleed ground,
+  because the client's markup showed the car as a panel beside the copy.
+
+  **One open question.** Amendments 4 and 5 both read "the new image ... of the yellow
+  Lambo", but they are two different sections. Amendment 5 is unambiguous - the client
+  pasted the yellow car with the 98 on the door onto the About header - so that file went
+  there. Amendment 4 has the black-and-yellow Aventador instead, to avoid running the same
+  photograph twice. To make both the same, point `.shot--distribution` and the
+  `#distributor` `<img>` at `about-supercar-98.jpg`.
+
+  The `contact.html` header still runs on the drawn `ground--streak`; no photograph was
+  specified for it. Note the two Supra frames are not interchangeable: the night one with
+  the light trails carries the `technology.html` header, the daytime city one carries the
+  home `#tech` section.
+
+- **`#tech` on the home page has to land inside one screen**, on the client's note. Three
+  things get it there and all of them matter: `.fit-screen` trades padding away and
+  rebalances the split towards the copy (the headline was ragging to four lines in the
+  narrow column), `.shot-img--cap` stops the photograph from being what decides the
+  section's height, and `.spec-groups--row` runs the nine highlights as three columns
+  across the foot instead of three stacked rows inside the copy. Measured at 549px in a
+  640px viewport, and 593px in a 950px one. If you add copy to this section, re-measure.
+- **The earlier supplied photographs** are `lab-viscometer.jpg`, `engine-pour.jpg`,
+  `diesel-pickup.jpg`, `sustainability-engine.jpg` and `scene-workshop.jpg`.
+  `engine-pour.jpg` was darkened to 82% brightness on request and is currently unplaced -
+  it held the home `#tech` panel until the Supra replaced it. `scene-workshop.jpg` is
+  the older yellow Lamborghini frame, still carrying the `distributors.html` header;
+  `about-supercar-98.jpg` is the newer render of the same scene, with the 98 door decal.
+
+- **Type over photography.** `.phead.sect--photo` gives the headline and standfirst a soft
+  ink halo, because the fade alone cannot hold every crop - the bright part of the subject
+  moves with the picture. `#top-nav::before` adds a short scrim off the top edge so the
+  links clear the sky while the bar is still transparent. `.lede--pop` sets the products
+  standfirst in yellow, which the client asked for by name.
+
+- **The technology two-up is down to one pack.** The client asked for a single bottle
+  until the second product shot exists. `.two-up` is still in the stylesheet for when the
+  10W-40 comes back.
+- **The PX98 nav lockup is exported from `Prince Label/PX98/PX98-02.png`** at 325x260,
+  and set 40% larger than it was (62px, 52px once the bar sticks) on a bar grown from
+  80/66px to 100/84px to keep the clearance. `#hero` and `.phead` top padding moved with
+  it. The favicon set is exported from `PX98-04.png` - the solid black lockup on the brand
+  yellow, which is the only pairing that still reads "PX98" at 16px. Regenerate any of it
+  from the source `.ai` if the mark changes.
+
 - **The Prince mark is 314x128.** Fine at footer scale, but it caps how large it can go.
   A vector version is presumably inside `Prince Label/PX98_Label/PX98_Label_FA.ai`.
 - **Remaining placeholders** are visibly labelled: the three news articles, and the map

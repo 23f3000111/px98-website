@@ -37,12 +37,12 @@
   /* ---------------------------------------------------------
      Shared chrome
      --------------------------------------------------------- */
-  /* The supplied PX98 logo, on its own. The "Another brand by Prince" line that
-     used to sit beside it has been removed at the client's request; the parent
-     company is endorsed in the footer instead. */
+  /* The supplied PX98 logo, on its own. Exported from PX98-02 at the client's
+     request. The "Another brand by Prince" line that used to sit beside it has been
+     removed; the parent company is endorsed in the footer instead. */
   function mark() {
     return '<a class="mark" href="index.html" aria-label="PX98 home">' +
-             '<img src="assets/img/brand/px98-logo.png" alt="PX98" width="161" height="132">' +
+             '<img src="assets/img/brand/px98-logo.png" alt="PX98" width="325" height="260">' +
            '</a>';
   }
 

@@ -109,7 +109,12 @@ ul { list-style: none; }
 /* The image URL lives here, not in an inline style: a url() inside a custom
    property resolves against the stylesheet that consumes it, so an HTML-relative
    path would 404. Swap a photo by editing one line below. */
-.shot--workshop { --shot: url("../img/scene-workshop.jpg"); }
+.shot--workshop     { --shot: url("../img/scene-workshop.jpg"); }
+.shot--performance  { --shot: url("../img/performance-racecar-98.jpg"); }
+.shot--distribution { --shot: url("../img/distribution-supercar.jpg"); }
+.shot--about        { --shot: url("../img/about-supercar-98.jpg"); }
+.shot--technology   { --shot: url("../img/technology-supra.jpg"); }
+.shot--products     { --shot: url("../img/products-supercar.jpg"); }
 
 /* ---------- drawn section grounds ----------
    Stands in for the four car photographs the client asked us to replace but has
@@ -237,6 +242,14 @@ ul { list-style: none; }
   transition: background .45s var(--e-out), backdrop-filter .45s, border-color .45s;
   border-bottom: 1px solid transparent;
 }
+/* Until it sticks the bar is transparent, and it now sits over a photograph on
+   every inner page. A short scrim off the top edge keeps the links off the sky. */
+#top-nav::before {
+  content: ''; position: absolute; inset: -1px 0 auto; height: 190%; z-index: -1;
+  pointer-events: none; opacity: 1; transition: opacity .45s var(--e-out);
+  background: linear-gradient(180deg, rgba(8,9,10,.78) 0%, rgba(8,9,10,.5) 46%, rgba(8,9,10,0) 100%);
+}
+#top-nav.stuck::before { opacity: 0; }
 #top-nav.stuck {
   background: rgba(8,9,10,.82);
   backdrop-filter: blur(18px) saturate(1.4);
@@ -245,19 +258,19 @@ ul { list-style: none; }
 }
 .nav-in {
   max-width: var(--max); margin-inline: auto; padding-inline: var(--pad-x);
-  height: 80px; display: flex; align-items: center; gap: 32px;
+  height: 100px; display: flex; align-items: center; gap: 32px;
   transition: height .45s var(--e-out);
 }
-#top-nav.stuck .nav-in { height: 66px; }
+#top-nav.stuck .nav-in { height: 84px; }
 
-/* The supplied PX98 logo, built from PX98-01: white PX over the yellow 98 with the
-   black keyline the packs carry, which reads as a clean edge on this ground. It is
-   a stacked two-row lockup, so it needs more height than a single-line wordmark to
-   hold the same presence. The endorsement line that used to sit beside it has been
-   removed at the client's request. */
+/* The supplied PX98 logo, now built from PX98-02 at the client's request: white PX
+   over the yellow 98, no black keyline. It is a stacked two-row lockup, so it needs
+   more height than a single-line wordmark to hold the same presence. Set 40% larger
+   than the previous 44px/37px pair, with the bar grown to match so the clearance
+   around the mark is preserved. */
 .mark { display: flex; align-items: center; flex: none; }
-.mark img { height: 44px; width: auto; transition: height .45s var(--e-out); }
-#top-nav.stuck .mark img { height: 37px; }
+.mark img { height: 62px; width: auto; transition: height .45s var(--e-out); }
+#top-nav.stuck .mark img { height: 52px; }
 
 .nav-links { display: flex; align-items: center; gap: 4px; margin-left: auto; }
 .nav-links a {
@@ -315,7 +328,7 @@ ul { list-style: none; }
    HERO
    ============================================================ */
 /* bottom padding keeps the grade rail clear of the fixed corner widgets */
-#hero { position: relative; min-height: 100svh; display: flex; align-items: flex-end; padding: 96px 0 62px; overflow: hidden; background: var(--ink); }
+#hero { position: relative; min-height: 100svh; display: flex; align-items: flex-end; padding: 116px 0 62px; overflow: hidden; background: var(--ink); }
 /* The scroll parallax that used to live here is gone with the photograph. Nothing
    in the hero is driven by scroll position now, so no scroll listener is needed. */
 .hero-field { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
@@ -463,6 +476,21 @@ ul { list-style: none; }
    The client's sustainability diagram is 3:2 with five callouts in it; in a split
    column its type would land under 9px. Headline and copy go above, full width
    below, which also breaks the run of left-image / right-text splits. */
+/* ---------- side figure ----------
+   The sustainability diagram used to run full width under its headline, which
+   pushed the section over a screen and a half. The client asked for it beside the
+   copy and inside one page, so the figure takes the wider column and is capped
+   against the viewport; the copy column carries the callout list as text, which is
+   what keeps the diagram's own labelling from having to be read at this size. */
+.side-fig {
+  display: grid; grid-template-columns: minmax(0,.78fr) minmax(0,1.22fr);
+  gap: clamp(30px, 4vw, 60px); align-items: center;
+}
+.side-fig-head { display: grid; gap: 20px; align-content: center; }
+.side-fig figure { margin: 0; }
+.side-fig img { width: 100%; height: auto; max-height: min(60svh, 540px); object-fit: contain; }
+@media (max-width: 900px) { .side-fig { grid-template-columns: 1fr; } }
+
 .stack-fig { display: grid; gap: clamp(30px, 4vw, 52px); }
 .stack-fig-head { display: grid; gap: 20px; max-width: 72ch; }
 .stack-fig figure { margin: 0; max-width: 1080px; width: 100%; }
@@ -503,6 +531,11 @@ ul { list-style: none; }
 .spec-groups { display: grid; }
 .spec-group { border-top: 1px solid var(--hair-d); padding-top: 17px; margin-top: 20px; }
 .spec-group:first-child { margin-top: 0; }
+/* the same three groups running across the foot of a section instead of down a
+   column, which is what keeps the home technology section inside one screen */
+.spec-groups--row { grid-template-columns: repeat(3, minmax(0,1fr)); gap: clamp(24px,3vw,52px); margin-top: clamp(24px,2.6vw,38px); }
+.spec-groups--row .spec-group { margin-top: 0; }
+@media (max-width: 900px) { .spec-groups--row { grid-template-columns: 1fr; gap: 0; } .spec-groups--row .spec-group { margin-top: 20px; } }
 .spec-group dt {
   font-family: var(--fm); font-size: 10px; font-weight: 500; letter-spacing: .2em;
   text-transform: uppercase; color: var(--y); margin-bottom: 11px;
@@ -556,6 +589,16 @@ ul { list-style: none; }
 .shot-img { width: 100%; height: auto; object-fit: cover; background: var(--ink-2); }
 .shot-img--4x3 { aspect-ratio: 4/3; }
 .shot-img--3x2 { aspect-ratio: 3/2; }
+.shot-img--16x9 { aspect-ratio: 16/9; }
+/* a photograph that must not be the thing that decides how tall a section is */
+.shot-img--cap { aspect-ratio: 16/9; max-height: min(40svh, 360px); object-fit: cover; }
+
+/* a section asked to land inside one screen: the padding gives way first, and the
+   photograph is capped above, so the copy never has to be cut to make it fit. The
+   split is rebalanced towards the copy, because a capped photograph no longer needs
+   the wider column and the headline was ragging to four lines inside the narrow one. */
+.fit-screen { padding-block: clamp(34px, 3.4vw, 58px); }
+.fit-screen .split { grid-template-columns: minmax(0,1.08fr) minmax(0,.92fr); align-items: start; }
 .sect--bone .ph { background: var(--bone-2); box-shadow: inset 0 0 0 1px var(--hair-l);
   background-image: repeating-linear-gradient(-45deg, rgba(8,9,10,.045) 0 1px, transparent 1px 9px); }
 .sect--bone .ph-label b { color: var(--slate); }
@@ -943,8 +986,28 @@ footer { background: var(--ink-1); border-top: 1px solid var(--hair-d); padding-
    PAGE HEADERS (inner pages)
    ============================================================ */
 /* page headers carry a photographic ground via .sect--photo (see tokens above) */
-.phead { position: relative; padding: 168px 0 clamp(46px,5vw,74px); overflow: hidden; border-bottom: 1px solid var(--hair-d); }
-.phead-in { position: relative; display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
+.phead { position: relative; padding: 188px 0 clamp(52px,5.5vw,84px); overflow: hidden; border-bottom: 1px solid var(--hair-d); }
+/* a photographic header earns the extra height: the car needs room to read beside
+   the headline instead of being cropped to a band */
+.phead.sect--photo { min-height: 64svh; display: flex; align-items: flex-end; }
+.phead-in { position: relative; display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; flex-wrap: wrap; width: 100%; }
+
+/* Type over a car: the fade alone cannot hold every crop, because the bright part
+   of the subject moves with the photograph. A soft ink halo travels with the type
+   instead, so the headline and standfirst stay readable over sky, chrome, a
+   headlight or yellow bodywork without dropping a panel over the picture. */
+.phead.sect--photo .d1 { text-shadow: 0 6px 44px rgba(8,9,10,.62), 0 2px 10px rgba(8,9,10,.5); }
+.phead.sect--photo .lede {
+  color: rgba(255,255,255,.9);
+  text-shadow: 0 1px 16px rgba(8,9,10,.96), 0 1px 4px rgba(8,9,10,.9);
+}
+/* The standfirst on the products header sits in the open right of the frame over a
+   sunset, where it was disappearing into the sky. Yellow, on the client's note. */
+.lede--pop {
+  color: var(--y); font-weight: 500;
+  padding-left: 18px; border-left: 2px solid var(--y);
+}
+.phead.sect--photo .lede--pop { color: var(--y); }
 .crumb { display: flex; gap: 9px; align-items: center; font-family: var(--fm); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--grey-2); margin-bottom: 18px; }
 .crumb a:hover { color: var(--y); }
 
@@ -964,7 +1027,7 @@ footer { background: var(--ink-1); border-top: 1px solid var(--hair-d); padding-
   .nav-links, .nav-cta { display: none; }
   .burger { display: block; margin-left: auto; }
   .hero-cols { grid-template-columns: 1fr; gap: 8px; }
-  #hero { padding-top: 104px; align-items: center; }
+  #hero { padding-top: 124px; align-items: center; }
   .split, .split--rev .split-a { grid-template-columns: 1fr; order: 0; }
   .spec-row { grid-template-columns: 1fr; gap: 4px; }
   .form-2 { grid-template-columns: 1fr; }

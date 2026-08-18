@@ -178,55 +178,58 @@
 </section>
 
 <!-- ══════════ TECHNOLOGY ══════════ -->
-<section class="sect sect--ink1 grain" id="tech">
+<section class="sect sect--tight sect--ink1 grain fit-screen" id="tech">
   <div class="wrap" style="position:relative;z-index:1">
     <div class="split split--rev">
       <div class="split-a" data-rv="r" style="position:relative">
-        <img class="shot-img notch" style="--notch:38px" src="assets/img/engine-pour.jpg" width="1400" height="1050"
-             alt="PX98 Eco Power SAE 0W-20 being poured into a modern engine">
+        <img class="shot-img shot-img--cap notch" style="--notch:38px"
+             src="assets/img/tech-supra-city.jpg" width="2000" height="1125" loading="lazy"
+             alt="A yellow performance car on a wet city street beneath the Petronas Towers, Kuala Lumpur">
       </div>
       <div data-rv="l">
-        <h2 class="d2" style="margin-bottom:22px">Precision Starts at the <i>Molecular Level.</i></h2>
+        <h2 class="d2" style="margin-bottom:20px">Precision at the<br><i>Molecular Level.</i></h2>
         <p class="lede" style="margin-bottom:18px">
           Every PX98 premium engine oil begins with carefully selected premium base stocks
           and highly-advanced additive systems.
         </p>
-        <p class="body-c" style="margin-bottom:32px">
+        <p class="body-c">
           The result is quicker lubrication during cold starts, stronger oil film under extreme loads,
           outstanding shear stability, and formidable oxidation resistance that keeps today's turbocharged
           engines running at peak efficiency.
         </p>
-        <!-- The nine highlights used to sit here as a nine-chip cluster, which the
-             client asked us to propose differently. They are grouped into the three
-             things they are actually claims about, with one rule per group. -->
-        <dl class="spec-groups">
-          <div class="spec-group">
-            <dt>Synthetic technology</dt>
-            <dd><ul>
-              <li>Future-ready synthetic base stocks</li>
-              <li>Next-generation additive systems</li>
-              <li>Exceptional viscosity stability</li>
-            </ul></dd>
-          </div>
-          <div class="spec-group">
-            <dt>Engine protection</dt>
-            <dd><ul>
-              <li>Timing chain wear protection</li>
-              <li>Turbocharger protection</li>
-              <li>Low speed pre-ignition control</li>
-              <li>Piston deposit control</li>
-            </ul></dd>
-          </div>
-          <div class="spec-group">
-            <dt>Efficiency and cleanliness</dt>
-            <dd><ul>
-              <li>Improved fuel economy</li>
-              <li>Superior oxidation resistance</li>
-            </ul></dd>
-          </div>
-        </dl>
       </div>
     </div>
+
+    <!-- The nine highlights used to sit as a nine-chip cluster, which the client
+         asked us to propose differently. They are grouped into the three things they
+         are actually claims about, with one rule per group. They sit under the split
+         rather than inside the copy column so the section keeps to one screen. -->
+    <dl class="spec-groups spec-groups--row" data-rv>
+      <div class="spec-group">
+        <dt>Synthetic technology</dt>
+        <dd><ul>
+          <li>Future-ready synthetic base stocks</li>
+          <li>Next-generation additive systems</li>
+          <li>Exceptional viscosity stability</li>
+        </ul></dd>
+      </div>
+      <div class="spec-group">
+        <dt>Engine protection</dt>
+        <dd><ul>
+          <li>Timing chain wear protection</li>
+          <li>Turbocharger protection</li>
+          <li>Low speed pre-ignition control</li>
+          <li>Piston deposit control</li>
+        </ul></dd>
+      </div>
+      <div class="spec-group">
+        <dt>Efficiency and cleanliness</dt>
+        <dd><ul>
+          <li>Improved fuel economy</li>
+          <li>Superior oxidation resistance</li>
+        </ul></dd>
+      </div>
+    </dl>
   </div>
 </section>
 
@@ -275,25 +278,28 @@
 </section>
 
 <!-- ══════════ PERFORMANCE ══════════ -->
-<!-- The car photograph and the placeholder panel stacked on top of it are both
-     gone: the client asked for a modern car without the flame exhaust, and the
-     file behind this section was a 739px wallpaper grab carrying a stock
-     watermark. Drawn ground until a licensed photograph is supplied.
-     TODO: modern performance car, 16:9, landscape, dark. Restore by swapping
-     .sect--ground.ground--streak back to .sect--photo and setting --shot. -->
+<!-- The supplied #98 race car now runs as a framed panel beside the copy, with the
+     drawn streak ground still carrying the section behind it. -->
 <section class="sect sect--ink1 sect--ground ground--streak" id="performance"
          style="--shot-fade:linear-gradient(90deg,rgba(8,9,10,.86) 0%,rgba(8,9,10,.6) 46%,rgba(8,9,10,.4) 100%)">
   <div class="wrap">
-    <div style="max-width:60ch">
-      <h2 class="d2" data-rv style="margin-bottom:22px">Confidence in<br><i>Every Drive.</i></h2>
-      <p class="lede" data-rv style="margin-bottom:18px">
-        Whether navigating city traffic, cruising highways, or pushing performance vehicles to their limits,
-        PX98 delivers dependable protection mile after mile.
-      </p>
-      <p class="body-c" data-rv>
-        From daily commuting to demanding operating environments, every formulation is designed to provide
-        consistent performance in every driving and climate condition.
-      </p>
+    <div class="split">
+      <div data-rv="l">
+        <h2 class="d2" style="margin-bottom:22px">Confidence in<br><i>Every Drive.</i></h2>
+        <p class="lede" style="margin-bottom:18px">
+          Whether navigating city traffic, cruising highways, or pushing performance vehicles to their limits,
+          PX98 delivers dependable protection mile after mile.
+        </p>
+        <p class="body-c">
+          From daily commuting to demanding operating environments, every formulation is designed to provide
+          consistent performance in every driving and climate condition.
+        </p>
+      </div>
+      <div class="split-a" data-rv="r">
+        <img class="shot-img shot-img--16x9 notch" src="assets/img/performance-racecar-98.jpg"
+             width="2000" height="1125" loading="lazy"
+             alt="A black and yellow PX98 number 98 race car at speed on a mountain highway">
+      </div>
     </div>
   </div>
 </section>
@@ -343,19 +349,26 @@
 </section>
 
 <!-- ══════════ DISTRIBUTORS ══════════ -->
-<!-- The image panel is removed: the client did not think one was needed here. The
-     pixel-dissolve car that used to sit behind the section went with it. -->
+<!-- The stock handshake is out at the client's request; the supplied supercar takes
+     the panel. Chips and the call to action stay full width underneath it. -->
 <section class="sect sect--ground ground--streak" id="distributor"
          style="--shot-fade:linear-gradient(90deg,rgba(8,9,10,.84) 0%,rgba(8,9,10,.62) 52%,rgba(8,9,10,.44) 100%)">
   <div class="wrap">
-    <div style="max-width:66ch">
-      <span class="eyebrow" data-rv>Distribution</span>
-      <h2 class="d2" data-rv style="margin:20px 0 22px">Grow With <i>PX98.</i></h2>
-      <p class="lede" data-rv style="margin-bottom:16px">Become part of our expanding global distribution network.</p>
-      <p class="body-c" data-rv style="margin-bottom:30px">
-        We are actively seeking passionate distributors who share our commitment to delivering premium,
-        high-performance lubrication solutions and exceptional customer support.
-      </p>
+    <div class="split" style="margin-bottom:clamp(34px,4vw,52px)">
+      <div data-rv="l">
+        <span class="eyebrow">Distribution</span>
+        <h2 class="d2" style="margin:20px 0 22px">Grow With <i>PX98.</i></h2>
+        <p class="lede" style="margin-bottom:16px">Become part of our expanding global distribution network.</p>
+        <p class="body-c">
+          We are actively seeking passionate distributors who share our commitment to delivering premium,
+          high-performance lubrication solutions and exceptional customer support.
+        </p>
+      </div>
+      <div class="split-a" data-rv="r">
+        <img class="shot-img shot-img--16x9 notch" src="assets/img/distribution-supercar.jpg"
+             width="2000" height="1125" loading="lazy"
+             alt="A black and yellow PX98 liveried supercar">
+      </div>
     </div>
     <ul class="chips" data-rv style="margin-bottom:34px">
       <li class="chip">Exclusive territory opportunities</li>

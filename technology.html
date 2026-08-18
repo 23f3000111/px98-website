@@ -21,13 +21,15 @@
 
 <main>
 
-<!-- TODO: licensed automotive photography, 21:9 landscape, dark. Restore by
-     swapping .sect--ground.ground--lattice for .sect--photo and setting --shot. -->
-<section class="phead sect--ground ground--lattice">
+<section class="phead sect--photo shot--technology"
+         style="--shot-pos:62% center;
+                --shot-fade:linear-gradient(90deg,rgba(8,9,10,.95) 0%,rgba(8,9,10,.88) 32%,rgba(8,9,10,.7) 54%,rgba(8,9,10,.36) 72%,rgba(8,9,10,.22) 86%,rgba(8,9,10,.52) 100%)">
   <div class="wrap phead-in">
     <div>
       <nav class="crumb" aria-label="Breadcrumb"><a href="index.html">PX98</a> / <span>Technology</span></nav>
-      <h1 class="d1" style="max-width:13ch">Precision at the <i>Molecular Level.</i></h1>
+      <!-- broken by hand: measured to the copy the headline used to rag "THE" onto a
+           line of its own, which is what the client marked up. -->
+      <h1 class="d1" style="max-width:17ch">Precision at the<br><i>Molecular Level.</i></h1>
     </div>
     <p class="lede" style="max-width:38ch;padding-bottom:8px">
       Every PX98 premium engine oil begins with carefully selected premium base stocks
@@ -106,25 +108,16 @@
 
     <div class="split" style="margin-top:clamp(52px,6vw,84px)">
       <div class="split-a" data-rv="l">
-        <!-- Both 4X4 TURBO POWER grades side by side, as the client asked. The
-             10W-40 label arrived with the new artwork folder, so neither side is
-             standing in for the other. -->
-        <div class="two-up">
-          <figure>
-            <div class="pd-stage">
-              <img src="assets/img/labels/4x4-turbo-power-sae-5w-30-ck-4-sn.webp"
-                   alt="PX98 4x4 Turbo Power SAE 5W-30 label artwork" loading="lazy">
-            </div>
-            <figcaption><b>5W-30</b>4x4 Turbo Power</figcaption>
-          </figure>
-          <figure>
-            <div class="pd-stage">
-              <img src="assets/img/labels/4x4-turbo-power-sae-10w-40-ck-4-sn.webp"
-                   alt="PX98 4x4 Turbo Power SAE 10W-40 label artwork" loading="lazy">
-            </div>
-            <figcaption><b>10W-40</b>4x4 Turbo Power</figcaption>
-          </figure>
-        </div>
+        <!-- One pack for now. The client asked for the pair to come back when the
+             product photography is ready; the 10W-40 figure that stood beside this
+             one has been withdrawn until then. -->
+        <figure style="margin:0;display:flex;flex-direction:column;gap:14px">
+          <div class="pd-stage">
+            <img src="assets/img/labels/4x4-turbo-power-sae-5w-30-ck-4-sn.webp"
+                 alt="PX98 4x4 Turbo Power SAE 5W-30 label artwork" loading="lazy">
+          </div>
+          <figcaption class="mono" style="color:var(--grey)">4x4 Turbo Power &mdash; SAE 5W-30</figcaption>
+        </figure>
       </div>
       <div data-rv="r">
         <span class="eyebrow">Modern low SAPS engine oil formulation</span>

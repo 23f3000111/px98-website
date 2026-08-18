@@ -21,7 +21,9 @@
 
 <main>
 
-<section class="phead sect--photo shot--workshop" style="--shot-pos:center right">
+<section class="phead sect--photo shot--about"
+         style="--shot-pos:64% center;
+                --shot-fade:linear-gradient(90deg,rgba(8,9,10,.94) 0%,rgba(8,9,10,.76) 28%,rgba(8,9,10,.4) 52%,rgba(8,9,10,.46) 74%,rgba(8,9,10,.62) 100%)">
   <div class="wrap phead-in">
     <div>
       <nav class="crumb" aria-label="Breadcrumb"><a href="index.html">PX98</a> / <span>About</span></nav>
@@ -93,18 +95,28 @@
   </div>
 </section>
 
-<section class="sect" id="sustainability">
+<!-- The diagram ran full width under its headline and pushed this section over a
+     screen and a half. The client asked for it on the side and inside one page, so
+     it sits in the wider column with its callouts repeated as text beside it. -->
+<section class="sect sect--tight" id="sustainability">
   <div class="wrap">
-    <div class="stack-fig">
-      <div class="stack-fig-head" data-rv>
+    <div class="side-fig">
+      <div class="side-fig-head" data-rv="l">
         <h2 class="d2">Smarter Engineering.<br><i>Better Tomorrow.</i></h2>
         <p class="lede">
           Through continuous innovation, PX98 engineers lubrication solutions that help improve efficiency,
           reduce resource consumption, and support long-term environmental responsibility.
         </p>
+        <ul class="chips">
+          <li class="chip">Fuel efficiency</li>
+          <li class="chip">Reduced emissions</li>
+          <li class="chip">Lower friction</li>
+          <li class="chip">Extended engine life</li>
+          <li class="chip">Energy conserving</li>
+        </ul>
       </div>
-      <figure data-rv="s">
-        <img src="assets/img/sustainability-engine.jpg" width="1500" height="1000"
+      <figure data-rv="r">
+        <img src="assets/img/sustainability-engine.jpg" width="1500" height="1000" loading="lazy"
              alt="A cutaway engine showing the five things PX98 lubrication is engineered to improve: fuel efficiency, reduced emissions, lower friction, extended engine life and energy conserving technology">
       </figure>
     </div>

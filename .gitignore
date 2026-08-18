@@ -22,3 +22,8 @@ Prince Label/
 *.ai
 *.psd
 px98 website amendment*.pdf
+Part 1 PX98 Website Amendments*.pdf
+
+# The client's photography drop: 2560px PNGs, 52MB of them. The 2000px JPEGs cut
+# from these live in assets/img/ and are committed; the originals stay out.
+Sample Images/

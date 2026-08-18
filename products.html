@@ -21,15 +21,17 @@
 
 <main>
 
-<!-- TODO: licensed automotive photography, 21:9 landscape, dark. Restore by
-     swapping .sect--ground.ground--streak for .sect--photo and setting --shot. -->
-<section class="phead sect--ground ground--streak">
+<section class="phead sect--photo shot--products"
+         style="--shot-pos:66% center;
+                --shot-fade:linear-gradient(90deg,rgba(8,9,10,.94) 0%,rgba(8,9,10,.74) 28%,rgba(8,9,10,.34) 54%,rgba(8,9,10,.26) 76%,rgba(8,9,10,.58) 100%)">
   <div class="wrap phead-in">
     <div>
       <nav class="crumb" aria-label="Breadcrumb"><a href="index.html">PX98</a> / <span>Products</span></nav>
       <h1 class="d1" style="max-width:12ch">The <i>Range.</i></h1>
     </div>
-    <p class="lede" style="max-width:38ch;padding-bottom:8px">
+    <!-- set in yellow with an ink halo: over a sunset the plain grey standfirst was
+         disappearing into the sky, which is what the client flagged. -->
+    <p class="lede lede--pop" style="max-width:38ch;padding-bottom:8px">
       A diverse lubrication portfolio built for engines, transmissions, drivetrains
       and essential vehicle systems.
     </p>
