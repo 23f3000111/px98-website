@@ -106,6 +106,81 @@ ul { list-style: none; }
 /* a black-ground plate drops straight in with screen blending */
 .sect--photo.is-screen::before { mix-blend-mode: screen; opacity: var(--shot-op, .78); filter: none; }
 
+/* Type over a car: the fade alone cannot hold every crop, because the bright part
+   of the subject moves with the photograph and with the viewport. A soft ink halo
+   travels with the headline instead of a panel being dropped over the picture. */
+.sect--photo .d1, .sect--photo .d2 { text-shadow: 0 6px 44px rgba(8,9,10,.62), 0 2px 10px rgba(8,9,10,.52); }
+
+/* A landscape photograph behind a portrait phone is cropped to its middle third,
+   which is rarely where the subject is. --shot-pos-m re-aims the same file for the
+   narrow viewport; sections that do not set it keep their desktop framing. */
+@media (max-width: 720px) {
+  .sect--photo::before { background-position: var(--shot-pos-m, var(--shot-pos, center)); }
+
+  /* A landscape frame behind a section that runs several phone screens tall gets
+     cropped to a tenth of its own width, which is no longer a picture of anything.
+     On a phone the photograph becomes a band at the head of the section and hands
+     the rest back to the ink, so what sits below lands on black rather than on a
+     smear of wall. Page headers and full-screen sections are already the right
+     shape for a crop, so they keep it. */
+  .sect--photo:not(.phead):not(.sect--screen)::before { inset: 0 0 auto; height: 46svh; }
+  .sect--photo:not(.phead):not(.sect--screen)::after {
+    inset: 0 0 auto; height: 46svh;
+    background: var(--shot-fade-m,
+      linear-gradient(180deg, rgba(8,9,10,.72) 0%, rgba(8,9,10,.38) 34%,
+                              rgba(8,9,10,.62) 74%, var(--ink) 100%));
+  }
+}
+
+/* ---------- full-screen photographic statements ----------
+   A section that hands the whole viewport to one photograph and sets the copy on
+   it, instead of boxing the picture into a column beside the type. */
+.sect--screen {
+  min-height: 100svh; display: flex; align-items: center;
+  padding-block: clamp(116px, 13vh, 164px);
+  border-block: 1px solid var(--hair-d);
+}
+.screen-in { position: relative; z-index: 1; width: 100%; }
+.screen-copy { max-width: 46ch; }
+/* the ink halo travels with the type, as on the page headers: a fade alone cannot
+   hold every crop once the bright part of the picture moves */
+.screen-copy .d2 { margin-bottom: 22px; text-shadow: 0 6px 44px rgba(8,9,10,.68), 0 2px 10px rgba(8,9,10,.56); }
+.screen-copy .lede { color: rgba(255,255,255,.88); margin-bottom: 18px; }
+.screen-copy .body-c { color: rgba(255,255,255,.76); }
+.screen-copy .lede, .screen-copy .body-c { text-shadow: 0 1px 16px rgba(8,9,10,.95), 0 1px 4px rgba(8,9,10,.82); }
+
+/* claims running across the foot of a full-screen photograph get a plate of their
+   own rather than trusting the picture to stay dark behind them */
+.spec-plate {
+  margin-top: clamp(30px, 5vh, 54px);
+  padding: clamp(22px, 2.4vw, 32px) clamp(22px, 2.6vw, 34px);
+  background: rgba(8,9,10,.66);
+  backdrop-filter: blur(11px) saturate(1.15);
+  -webkit-backdrop-filter: blur(11px) saturate(1.15);
+  box-shadow: inset 0 0 0 1px var(--hair-d);
+}
+.spec-plate .spec-group { border-top-color: var(--hair-d-2); }
+
+/* The horizontal fade holds because the copy sits in the dark left of the frame.
+   Stacked on a phone the copy runs the full width, so the ink has to come down the
+   picture instead of across it. */
+@media (max-width: 720px) {
+  .sect--screen.sect--photo::after {
+    background: var(--shot-fade-m,
+      linear-gradient(180deg, rgba(8,9,10,.74) 0%, rgba(8,9,10,.55) 26%,
+                              rgba(8,9,10,.8) 58%, rgba(8,9,10,.95) 100%));
+  }
+  /* stacked on a phone the plate is one long column rather than a band, so it stops
+     being a plate and goes back to plain rules on the ink the vertical fade lays
+     down. Kept on the same breakpoint as that fade, so the two never disagree. */
+  .spec-plate { background: none; backdrop-filter: none; -webkit-backdrop-filter: none; box-shadow: none; padding: 0; }
+}
+
+@media (max-width: 900px) {
+  .sect--screen { min-height: 94svh; align-items: flex-end; padding-block: clamp(104px, 15vh, 140px) clamp(44px, 7vh, 68px); }
+  .screen-copy { max-width: none; }
+}
+
 /* The image URL lives here, not in an inline style: a url() inside a custom
    property resolves against the stylesheet that consumes it, so an HTML-relative
    path would 404. Swap a photo by editing one line below. */
@@ -115,6 +190,10 @@ ul { list-style: none; }
 .shot--about        { --shot: url("../img/about-supercar-98.jpg"); }
 .shot--technology   { --shot: url("../img/technology-supra.jpg"); }
 .shot--products     { --shot: url("../img/products-supercar.jpg"); }
+.shot--why98        { --shot: url("../img/why-supercar-98.jpg"); }
+.shot--tech-city    { --shot: url("../img/tech-supra-city.jpg"); }
+.shot--about-speed  { --shot: url("../img/about-supra-speed.jpg"); }
+.shot--coastal98    { --shot: url("../img/distributors-coastal-98.jpg"); }
 
 /* ---------- drawn section grounds ----------
    Stands in for the four car photographs the client asked us to replace but has
@@ -329,19 +408,25 @@ ul { list-style: none; }
    ============================================================ */
 /* bottom padding keeps the grade rail clear of the fixed corner widgets */
 #hero { position: relative; min-height: 100svh; display: flex; align-items: flex-end; padding: 116px 0 62px; overflow: hidden; background: var(--ink); }
-/* The scroll parallax that used to live here is gone with the photograph. Nothing
-   in the hero is driven by scroll position now, so no scroll listener is needed. */
-.hero-field { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
-
-/* The hero photograph is gone. It was a 740px-wide file stretched across a
-   full-bleed hero, which is what the client saw as blur. The pack group is the
-   subject now, standing on the label's own warm light bands. */
-.hero-ground {
-  position: absolute; inset: 0;
+/* The photograph is back but the scroll parallax is not: nothing in the hero is
+   driven by scroll position, so there is still no scroll listener behind it. */
+/* the ground the photograph stands on, and what shows if it never loads */
+.hero-field {
+  position: absolute; inset: 0; z-index: 0; overflow: hidden;
   background:
     repeating-linear-gradient(107deg, rgba(255,210,0,.06) 0 1px, transparent 1px 52px),
     radial-gradient(105% 80% at 74% 16%, rgba(255,210,0,.13), transparent 60%),
     linear-gradient(166deg, #14181f, var(--ink) 58%, #05070a);
+}
+
+/* The car is back in the hero, stretched full bleed. What read as blur before was
+   a 740px file behind a 2560px hero; this cut is 2400px wide, so it holds the
+   stretch. The pack group still stands in front of it on its own pool of light. */
+.hero-ground {
+  position: absolute; inset: 0;
+  background: url("../img/hero-supercar-98.jpg") var(--hero-pos, 50% 44%) / cover no-repeat;
+  filter: saturate(1.04) contrast(1.03) brightness(.84);
+  transform: scale(1.02);
 }
 
 /* left-weighted: enough ink under the headline, then it opens right up so the car reads */
@@ -393,9 +478,11 @@ ul { list-style: none; }
 @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(255,210,0,.55); } 60% { box-shadow: 0 0 0 9px rgba(255,210,0,0); } }
 
 #hero h1 { font-family: var(--fd); font-weight: 800; font-stretch: 86%; text-transform: uppercase;
-  font-size: clamp(42px, 6.9vw, 100px); line-height: .88; letter-spacing: -.028em; margin-bottom: 24px; }
+  font-size: clamp(42px, 6.9vw, 100px); line-height: .88; letter-spacing: -.028em; margin-bottom: 24px;
+  text-shadow: 0 6px 42px rgba(6,7,8,.72), 0 2px 12px rgba(6,7,8,.55); }
 #hero h1 i { font-style: italic; font-weight: 900; color: var(--y); font-stretch: 80%; }
-.hero-sub { max-width: 46ch; color: rgba(255,255,255,.66); font-size: clamp(15px,1.1vw,17px); line-height: 1.7; margin-bottom: 26px; }
+.hero-sub { max-width: 46ch; color: rgba(255,255,255,.72); font-size: clamp(15px,1.1vw,17px); line-height: 1.7; margin-bottom: 26px;
+  text-shadow: 0 1px 16px rgba(6,7,8,.92), 0 1px 4px rgba(6,7,8,.8); }
 .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
 
 /* the grade rail — PX98's actual viscosity coverage, doubles as a jump-off.
@@ -516,6 +603,22 @@ ul { list-style: none; }
 .card-icon { width: 34px; height: 34px; margin-bottom: 20px; stroke: var(--y); fill: none; stroke-width: 1.3; }
 .card h3 { font-family: var(--fd); font-weight: 700; font-stretch: 90%; text-transform: uppercase; font-size: 19px; line-height: 1.12; margin-bottom: 12px; letter-spacing: -.005em; }
 .card p { font-size: 14px; line-height: 1.62; color: rgba(255,255,255,.56); }
+
+/* Six benefit boxes want three even columns. Left to auto-fit they land as five
+   across and one orphan on a wide screen, which is what the client was looking at.
+   The ghost numeral gives the boxes something to hold in place of an icon. */
+.cards--3 { grid-template-columns: repeat(3, minmax(0,1fr)); counter-reset: box; }
+.cards--3 .card { counter-increment: box; padding-right: 68px; }
+.cards--3 .card::before {
+  content: counter(box, decimal-leading-zero);
+  position: absolute; top: 26px; right: 24px; pointer-events: none;
+  font-family: var(--fm); font-weight: 600; font-size: 44px; line-height: 1;
+  letter-spacing: -.03em; color: rgba(255,255,255,.055);
+  transition: color .5s var(--e-out);
+}
+.cards--3 .card:hover::before { color: rgba(255,210,0,.17); }
+@media (max-width: 900px) { .cards--3 { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (max-width: 620px) { .cards--3 { grid-template-columns: 1fr; } }
 
 .sect--bone .cards { background: var(--hair-l); border-color: var(--hair-l); }
 .sect--bone .card { background: var(--bone); }
@@ -1027,7 +1130,10 @@ footer { background: var(--ink-1); border-top: 1px solid var(--hair-d); padding-
   .nav-links, .nav-cta { display: none; }
   .burger { display: block; margin-left: auto; }
   .hero-cols { grid-template-columns: 1fr; gap: 8px; }
-  #hero { padding-top: 124px; align-items: center; }
+  /* a portrait viewport only ever sees a quarter of a 16:9 frame. On centre that
+     quarter is the windscreen; at 25% it is the striped bonnet and the badge, which
+     is the part that still reads as the car behind the packs */
+  #hero { padding-top: 124px; align-items: center; --hero-pos: 25% 50%; }
   .split, .split--rev .split-a { grid-template-columns: 1fr; order: 0; }
   .spec-row { grid-template-columns: 1fr; gap: 4px; }
   .form-2 { grid-template-columns: 1fr; }
