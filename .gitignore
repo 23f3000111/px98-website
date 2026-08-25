@@ -12,9 +12,8 @@ __MACOSX/
 node_modules/
 
 # Client source material. Print artwork, layered files and review decks, around
-# 90MB of it. The web-ready cuts live in assets/img/labels/ and are committed;
-# these originals stay out of the repo. A plain `git add -A` sweeps them in
-# otherwise.
+# 90MB of it. The web-ready cuts live in assets/img/ and are committed; these
+# originals stay out of the repo. A plain `git add -A` sweeps them in otherwise.
 #
 # Deliberately not a blanket *.pdf rule: product datasheets are the kind of thing
 # this site will want to serve, and those belong in the repo.
@@ -27,3 +26,8 @@ Part 1 PX98 Website Amendments*.pdf
 # The client's photography drop: 2560px PNGs, 52MB of them. The 2000px JPEGs cut
 # from these live in assets/img/ and are committed; the originals stay out.
 Sample Images/
+
+# The 25 Aug 2026 client drop: 227MB of 4725px pack renders and 8K photography.
+# tools/build-images.py turns them into what assets/img/ actually serves, and only
+# those cuts are committed.
+client_image/

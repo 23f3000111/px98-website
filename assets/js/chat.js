@@ -213,8 +213,8 @@
   function hitHTML(p) {
     var grade = p.grade ? p.grade.replace('SAE ', '') : (p.variant || 'Fluid');
     var label = p.name.replace('PX98 ', '').replace(p.grade, '').replace(/\s{2,}/g, ' ').trim();
-    /* approved label artwork where it exists, same resolver the catalogue uses */
-    var src = window.PX98_labelSrc ? window.PX98_labelSrc(p.id) : null;
+    /* the client's pack render where it exists, same resolver the catalogue uses */
+    var src = window.PX98_packSrc ? window.PX98_packSrc(p.id) : null;
     var art = src
       ? '<img src="' + src + '" alt="">'
       : '<span class="chat-hit-fallback"></span>';

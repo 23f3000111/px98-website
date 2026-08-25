@@ -109,7 +109,7 @@
       '</div></footer>' +
       '<button id="totop" aria-label="Back to top"><svg viewBox="0 0 16 9" aria-hidden="true"><path d="M0 4.5h13M9.5 1l3.5 3.5L9.5 8" stroke="currentColor" stroke-width="1.6" fill="none"/></svg></button>' +
       '<aside id="mock-note"><button aria-label="Dismiss">&times;</button>' +
-        '<b>Presentation mockup</b> Packs are the approved PX98 label artwork. Automotive photography is still to be licensed.' +
+        '<b>Presentation mockup</b> Packs are the approved PX98 renders supplied by the client. Automotive photography is from the client sample set and is not final.' +
       '</aside>';
   }
 
@@ -214,16 +214,35 @@
     document.body.appendChild(w);
     requestAnimationFrame(function () { w.classList.add('done'); });
 
+    /* A link to a hash on the page you are already on does not navigate, it only
+       scrolls, so the wipe would drop over the page and never lift again. That is
+       what "Sustainability" did from anywhere on the About page: a full screen of
+       yellow and nothing behind it. Same-document links are left to the browser,
+       along with anything the visitor asked to open elsewhere. */
     document.addEventListener('click', function (e) {
+      if (e.defaultPrevented || e.button !== 0 ||
+          e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
       var a = e.target.closest ? e.target.closest('a') : null;
       if (!a) return;
       var href = a.getAttribute('href');
       if (!href || href.charAt(0) === '#' || a.target === '_blank' ||
-          /^(https?:|mailto:|tel:)/.test(href)) return;
+          a.hasAttribute('download') || /^(mailto:|tel:)/.test(href)) return;
+      var to;
+      try { to = new URL(a.href, window.location.href); } catch (err) { return; }
+      if (to.origin !== window.location.origin) return;                       // off-site
+      if (to.pathname === window.location.pathname &&
+          to.search === window.location.search) return;                       // same document
       e.preventDefault();
       w.classList.remove('done');
       w.classList.add('out');
       setTimeout(function () { window.location.href = href; }, 420);
+    });
+
+    /* The back button can hand the page back from the cache with the wipe still
+       down over it, so it is lifted again every time the page is shown. */
+    window.addEventListener('pageshow', function () {
+      w.classList.remove('out');
+      w.classList.add('done');
     });
   }
 
@@ -295,10 +314,12 @@
   /* ---------------------------------------------------------
      Catalogue
      --------------------------------------------------------- */
-  /* Products whose approved label artwork the client has supplied. The file is always
-     assets/img/labels/<id>.webp, so the id is the whole mapping. Seven of the
-     thirty-six have no artwork yet and fall through to the CSS plate. */
-  var LABELLED = {};
+  /* Products the client has supplied a pack render for. The file is always
+     assets/img/packs/px98/<id>.webp, so the id is the whole mapping. These are the
+     client's own renders of the finished bottle and they replace the flat label
+     artwork the mockup used to carry. Four of the thirty-six have no render yet and
+     fall through to the CSS plate. */
+  var PACKED = {};
   ['eco-power-sae-0w-20-sp-rc-gf-6a', 'eco-power-sae-0w-30-sp-rc-gf-6a',
    'eco-power-sae-5w-30-sp-rc-gf-6a', 'turbo-power-sae-5w-40-sp', 'turbo-power-sae-5w-50-sp',
    'advan-power-sae-5w-30-sp-rc-gf-6a', 'advan-power-sae-10w-40-sp',
@@ -311,19 +332,20 @@
    'shift-force-hypoid-gear-sae-90-gl-5', 'shift-force-ep-manual-sae-140-gl-4',
    'shift-force-atf-lv', 'shift-force-atf-mv', 'shift-force-atf-dw-1', 'shift-force-atf-ws',
    'shift-force-ammix-d3-sp', 'shift-force-dctf', 'shift-force-cvtf',
+   '50-50-coolant-red', '50-50-coolant-blue', '50-50-coolant-green',
    'super-dot-4-brake-fluid', 'modern-dot-5-1-brake-fluid'
-  ].forEach(function (id) { LABELLED[id] = 1; });
+  ].forEach(function (id) { PACKED[id] = 1; });
 
-  function labelSrc(id) { return 'assets/img/labels/' + id + '.webp'; }
+  function packSrc(id) { return 'assets/img/packs/px98/' + id + '.webp'; }
 
   /* The assistant renders its own result rows, so it needs the same answer about
-     which products have artwork. One resolver, both callers. */
-  window.PX98_labelSrc = function (id) { return LABELLED[id] ? labelSrc(id) : null; };
+     which products have a render. One resolver, both callers. */
+  window.PX98_packSrc = function (id) { return PACKED[id] ? packSrc(id) : null; };
 
   function packShot(p) {
-    if (LABELLED[p.id]) {
-      return '<img class="label-art" src="' + labelSrc(p.id) + '" alt="' + esc(p.name) +
-             ' label artwork" loading="lazy">';
+    if (PACKED[p.id]) {
+      return '<img class="pack-art" src="' + packSrc(p.id) + '" alt="' + esc(p.name) +
+             ' pack" loading="lazy">';
     }
     var band = esc(p.family || p.type);
     return '<div class="plate-pack" role="img" aria-label="' + esc(p.name) + ' pack, artwork pending">' +
@@ -440,7 +462,7 @@
       '<div class="pd-shot" data-rv="l">' +
         '<div class="pd-stage">' + packShot(p) + '</div>' +
         '<div class="mono" style="margin-top:14px;font-size:9.5px">' +
-          (p.exactArt ? 'Approved label artwork' : 'Representative pack, artwork in production') +
+          (PACKED[p.id] ? 'Approved pack artwork' : 'Representative pack, artwork in production') +
         '</div>' +
       '</div>' +
       '<div class="pd-body" data-rv>' +
