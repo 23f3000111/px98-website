@@ -27,7 +27,11 @@ Part 1 PX98 Website Amendments*.pdf
 # from these live in assets/img/ and are committed; the originals stay out.
 Sample Images/
 
-# The 25 Aug 2026 client drop: 227MB of 4725px pack renders and 8K photography.
-# tools/build-images.py turns them into what assets/img/ actually serves, and only
-# those cuts are committed.
+# The client's drops, around 400MB between them: 4725px pack renders and 8K
+# photography under client_image/, the approved photography set under Selected/, and
+# the 26 Aug amendment deck and its four bottles under client_latest_amendament/.
+# tools/build-images.py turns all three into what assets/img/ actually serves, and
+# only those cuts are committed.
 client_image/
+Selected/
+client_latest_amendament/

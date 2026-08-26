@@ -7,7 +7,7 @@ window.PX98_PRODUCTS = [
   "variant": "SP-RC/GF-6A",
   "grade": "SAE 0W-20",
   "cat": "pcmo",
-  "catLabel": "Passenger Car Motor Oils",
+  "catLabel": "Passenger Car Engine Oil",
   "type": "Passenger Car Motor Oil",
   "base": "Fully Synthetic",
   "industry": "API SP-RC, ILSAC GF-6A",
@@ -47,7 +47,7 @@ window.PX98_PRODUCTS = [
   "variant": "SP-RC/GF-6A",
   "grade": "SAE 0W-30",
   "cat": "pcmo",
-  "catLabel": "Passenger Car Motor Oils",
+  "catLabel": "Passenger Car Engine Oil",
   "type": "Passenger Car Motor Oil",
   "base": "VHVI Fully Synthetic",
   "industry": "API SP-RC, ACEA A5/B5, ILSAC GF-6A",
@@ -87,7 +87,7 @@ window.PX98_PRODUCTS = [
   "variant": "SP-RC/GF-6A",
   "grade": "SAE 5W-30",
   "cat": "pcmo",
-  "catLabel": "Passenger Car Motor Oils",
+  "catLabel": "Passenger Car Engine Oil",
   "type": "Passenger Car Motor Oil",
   "base": "Fully Synthetic",
   "industry": "API SP-RC, ILSAC GF-6A",
@@ -127,7 +127,7 @@ window.PX98_PRODUCTS = [
   "variant": "SP",
   "grade": "SAE 5W-40",
   "cat": "pcmo",
-  "catLabel": "Passenger Car Motor Oils",
+  "catLabel": "Passenger Car Engine Oil",
   "type": "Passenger Car Motor Oil",
   "base": "VHVI Fully Synthetic",
   "industry": "API SP, ACEA A3/B4",
@@ -167,7 +167,7 @@ window.PX98_PRODUCTS = [
   "variant": "SP",
   "grade": "SAE 5W-50",
   "cat": "pcmo",
-  "catLabel": "Passenger Car Motor Oils",
+  "catLabel": "Passenger Car Engine Oil",
   "type": "Passenger Car Motor Oil",
   "base": "VHVI Fully Synthetic",
   "industry": "API SP, ACEA A3/B4",
@@ -203,7 +203,7 @@ window.PX98_PRODUCTS = [
   "variant": "SP-RC/GF-6A",
   "grade": "SAE 5W-30",
   "cat": "pcmo",
-  "catLabel": "Passenger Car Motor Oils",
+  "catLabel": "Passenger Car Engine Oil",
   "type": "Passenger Car Motor Oil",
   "base": "Advanced Synthetic Technology",
   "industry": "API SP-RC, ILSAC GF-6A",
@@ -239,7 +239,7 @@ window.PX98_PRODUCTS = [
   "variant": "SP",
   "grade": "SAE 10W-40",
   "cat": "pcmo",
-  "catLabel": "Passenger Car Motor Oils",
+  "catLabel": "Passenger Car Engine Oil",
   "type": "Passenger Car Motor Oil",
   "base": "Advanced Synthetic Technology",
   "industry": "API SP, ACEA A3/B4",
@@ -275,7 +275,7 @@ window.PX98_PRODUCTS = [
   "variant": "SN/CF",
   "grade": "SAE 10W-30",
   "cat": "pcmo",
-  "catLabel": "Passenger Car Motor Oils",
+  "catLabel": "Passenger Car Engine Oil",
   "type": "Passenger Car Motor Oil",
   "base": "Premium Mineral",
   "industry": "API SN/CF",
@@ -311,7 +311,7 @@ window.PX98_PRODUCTS = [
   "variant": "SN/CF",
   "grade": "SAE 15W-40",
   "cat": "pcmo",
-  "catLabel": "Passenger Car Motor Oils",
+  "catLabel": "Passenger Car Engine Oil",
   "type": "Passenger Car Motor Oil",
   "base": "Premium Mineral",
   "industry": "API SN/CF, ACEA A3/B4",
@@ -347,7 +347,7 @@ window.PX98_PRODUCTS = [
   "variant": "SL/CF",
   "grade": "SAE 20W-50",
   "cat": "pcmo",
-  "catLabel": "Passenger Car Motor Oils",
+  "catLabel": "Passenger Car Engine Oil",
   "type": "Passenger Car Motor Oil",
   "base": "Premium Mineral",
   "industry": "API SL/CF, ACEA A3/B4",
@@ -383,7 +383,7 @@ window.PX98_PRODUCTS = [
   "variant": "CK-4/SN",
   "grade": "SAE 5W-30",
   "cat": "diesel",
-  "catLabel": "Commercial Diesel Engine Oils",
+  "catLabel": "Diesel Oil",
   "type": "Commercial Diesel Engine Oil",
   "base": "VHVI Fully Synthetic",
   "industry": "API CK-4/SN, ACEA E8/E11 (Low SAPS)",
@@ -423,7 +423,7 @@ window.PX98_PRODUCTS = [
   "variant": "CK-4/SN",
   "grade": "SAE 10W-40",
   "cat": "diesel",
-  "catLabel": "Commercial Diesel Engine Oils",
+  "catLabel": "Diesel Oil",
   "type": "Commercial Diesel Engine Oil",
   "base": "VHVI Fully Synthetic",
   "industry": "API CK-4/SN, ACEA E8/E11 (Low SAPS)",
@@ -463,7 +463,7 @@ window.PX98_PRODUCTS = [
   "variant": "CJ-4/SN",
   "grade": "SAE 10W-30",
   "cat": "diesel",
-  "catLabel": "Commercial Diesel Engine Oils",
+  "catLabel": "Diesel Oil",
   "type": "Commercial Diesel Engine Oil",
   "base": "Advanced Synthetic Technology",
   "industry": "API CJ-4/SN, ACEA E6/E9",
@@ -503,7 +503,7 @@ window.PX98_PRODUCTS = [
   "variant": "CJ-4/SN",
   "grade": "SAE 10W-40",
   "cat": "diesel",
-  "catLabel": "Commercial Diesel Engine Oils",
+  "catLabel": "Diesel Oil",
   "type": "Commercial Diesel Engine Oil",
   "base": "Advanced Synthetic Technology",
   "industry": "API CJ-4/SN, ACEA E6/E9",
@@ -543,7 +543,7 @@ window.PX98_PRODUCTS = [
   "variant": "CI-4 PLUS",
   "grade": "SAE 15W-40",
   "cat": "diesel",
-  "catLabel": "Commercial Diesel Engine Oils",
+  "catLabel": "Diesel Oil",
   "type": "Commercial Diesel Engine Oil",
   "base": "Premium Synthetic Blend",
   "industry": "API CI-4/CI-4 PLUS, ACEA E7",
@@ -583,7 +583,7 @@ window.PX98_PRODUCTS = [
   "variant": "MANUAL SAE 75W-90 GL-4",
   "grade": "SAE 75W-90",
   "cat": "gear",
-  "catLabel": "Manual, Axles & Differential Gear Oils",
+  "catLabel": "Gear Oil",
   "type": "Manual Transmission Fluid",
   "base": "Fully Synthetic",
   "industry": "API GL-4",
@@ -623,7 +623,7 @@ window.PX98_PRODUCTS = [
   "variant": "MANUAL SAE 80W-90 GL-4",
   "grade": "SAE 80W-90",
   "cat": "gear",
-  "catLabel": "Manual, Axles & Differential Gear Oils",
+  "catLabel": "Gear Oil",
   "type": "Manual Transmission Fluid",
   "base": "Premium Mineral",
   "industry": "API GL-4",
@@ -663,7 +663,7 @@ window.PX98_PRODUCTS = [
   "variant": "LIMITED SLIP AXLE GEAR SAE 80W-90 GL-5",
   "grade": "SAE 80W-90",
   "cat": "gear",
-  "catLabel": "Manual, Axles & Differential Gear Oils",
+  "catLabel": "Gear Oil",
   "type": "Limited Slip Axle Gear Oil",
   "base": "Premium Mineral",
   "industry": "API GL-5",
@@ -703,7 +703,7 @@ window.PX98_PRODUCTS = [
   "variant": "LIMITED SLIP DIFFERENTIAL GEAR SAE 85W-90 GL-5",
   "grade": "SAE 85W-90",
   "cat": "gear",
-  "catLabel": "Manual, Axles & Differential Gear Oils",
+  "catLabel": "Gear Oil",
   "type": "Limited Slip Differential Gear Oil",
   "base": "Premium Mineral",
   "industry": "API GL-5",
@@ -743,7 +743,7 @@ window.PX98_PRODUCTS = [
   "variant": "HYPOID GEAR SAE 90 GL-5",
   "grade": "SAE 90",
   "cat": "gear",
-  "catLabel": "Manual, Axles & Differential Gear Oils",
+  "catLabel": "Gear Oil",
   "type": "Hypoid Gear Oil",
   "base": "Premium Mineral",
   "industry": "API GL-5",
@@ -783,7 +783,7 @@ window.PX98_PRODUCTS = [
   "variant": "EP MANUAL SAE 140 GL-4",
   "grade": "SAE 140",
   "cat": "gear",
-  "catLabel": "Manual, Axles & Differential Gear Oils",
+  "catLabel": "Gear Oil",
   "type": "Manual Transmission Gear Oil",
   "base": "Premium Mineral",
   "industry": "API GL-4",
@@ -818,12 +818,12 @@ window.PX98_PRODUCTS = [
  },
  {
   "id": "shift-force-9hp-pro",
-  "name": "PX98 SHIFT FORCE 9HP PRO",
+  "name": "PX98 SHIFT FORCE ATF 9HP PRO",
   "family": "SHIFT FORCE",
-  "variant": "9HP PRO",
+  "variant": "ATF 9HP PRO",
   "grade": "",
   "cat": "atf",
-  "catLabel": "Automatic Transmission Fluids",
+  "catLabel": "ATF",
   "type": "Automatic Transmission Fluid",
   "base": "Fully Synthetic",
   "industry": "ZF LifeguardFluid 9",
@@ -853,13 +853,45 @@ window.PX98_PRODUCTS = [
   "euro": false
  },
  {
+  "id": "shift-force-atf-8hp-pro",
+  "name": "PX98 SHIFT FORCE ATF 8HP PRO",
+  "family": "SHIFT FORCE",
+  "variant": "ATF 8HP PRO",
+  "grade": "",
+  "cat": "atf",
+  "catLabel": "ATF",
+  "type": "Automatic Transmission Fluid",
+  "base": "Fully Synthetic",
+  "industry": "ZF LifeguardFluid 8",
+  "oem": "",
+  "apps": "8-Speed Automatic Transmissions in BMW, Audi, VW, Porsche & Land Rover Vehicles",
+  "desc": "Built for the 8HP family of 8-speed automatic transmissions, PX98 SHIFT FORCE ATF 8HP PRO pairs fully synthetic base stocks with a low-viscosity friction modifier system to deliver rapid, seamless gear engagement, precise shift control and dependable wear protection. Its formulation holds its viscosity in shear and its friction characteristics under heat, so shift quality and transmission efficiency stay consistent across long drain intervals and high torque loads.",
+  "specs": [
+   {
+    "k": "Base Oil Type",
+    "v": "Fully Synthetic"
+   },
+   {
+    "k": "Specific Performance Level",
+    "v": "ZF LifeguardFluid 8"
+   },
+   {
+    "k": "Applications",
+    "v": "8-Speed Automatic Transmissions in BMW, Audi, VW, Porsche & Land Rover Vehicles"
+   }
+  ],
+  "shot": "",
+  "exactArt": false,
+  "euro": false
+ },
+ {
   "id": "shift-force-atf-lv",
   "name": "PX98 SHIFT FORCE ATF LV",
   "family": "SHIFT FORCE",
   "variant": "ATF LV",
   "grade": "",
   "cat": "atf",
-  "catLabel": "Automatic Transmission Fluids",
+  "catLabel": "ATF",
   "type": "Automatic Transmission Fluid",
   "base": "Fully Synthetic",
   "industry": "Ford MERCON® LV, GM DEXRON®-VI, JASO 1A-LV",
@@ -895,7 +927,7 @@ window.PX98_PRODUCTS = [
   "variant": "ATF MV",
   "grade": "",
   "cat": "atf",
-  "catLabel": "Automatic Transmission Fluids",
+  "catLabel": "ATF",
   "type": "Automatic Transmission Fluid",
   "base": "Advanced Synthetic Technology",
   "industry": "Ford MERCON® V, GM DEXRON® III(H)",
@@ -931,10 +963,10 @@ window.PX98_PRODUCTS = [
   "variant": "ATF DW-1",
   "grade": "",
   "cat": "atf",
-  "catLabel": "Automatic Transmission Fluids",
+  "catLabel": "ATF",
   "type": "Automatic Transmission Fluid",
   "base": "Fully Synthetic",
-  "industry": "",
+  "industry": "Honda ATF DW-1",
   "oem": "Honda ATF DW-1",
   "apps": "Latest Honda & Acura Automatic Transmissions Requiring DW-1 Fluid",
   "desc": "Precisely engineered for modern Honda and Acura automatic transmissions, PX98 SHIFT FORCE ATF DW-1 delivers exceptional friction stability, smooth shift quality, outstanding oxidation resistance, and excellent low-temperature fluidity. Its advanced synthetic formulation minimizes transmission shudder while ensuring long-lasting wear protection, offering enhanced fuel efficiency and consistent transmission performance.",
@@ -963,10 +995,10 @@ window.PX98_PRODUCTS = [
   "variant": "ATF WS",
   "grade": "",
   "cat": "atf",
-  "catLabel": "Automatic Transmission Fluids",
+  "catLabel": "ATF",
   "type": "Automatic Transmission Fluid",
   "base": "Fully Synthetic",
-  "industry": "",
+  "industry": "Aisin Warner JWS 3324",
   "oem": "Aisin Warner JWS 3324, Toyota/ Scion/Lexus ATF Type WS",
   "apps": "Modern Toyota, Scion & Lexus Automatic Transmissions Requiring WS Fluid",
   "desc": "Purpose-built for Toyota and Lexus automatic transmissions of the latest generation, PX98 SHIFT FORCE ATF WS combines specially designed synthetic technology with cutting-edge friction modifiers and additive systems to deliver exceptionally smooth shifting, energy conserving, superior thermal-oxidative stability, exceptional anti-shudder performance, and reliable transmission protection throughout extended service intervals.",
@@ -995,7 +1027,7 @@ window.PX98_PRODUCTS = [
   "variant": "AMMIX D3-SP",
   "grade": "",
   "cat": "atf",
-  "catLabel": "Automatic Transmission Fluids",
+  "catLabel": "ATF",
   "type": "Automatic Transmission Fluid",
   "base": "Advanced Synthetic Technology",
   "industry": "DEXRON® III",
@@ -1031,7 +1063,7 @@ window.PX98_PRODUCTS = [
   "variant": "DCTF",
   "grade": "",
   "cat": "atf",
-  "catLabel": "Automatic Transmission Fluids",
+  "catLabel": "ATF",
   "type": "Dual Clutch Transmission Fluid",
   "base": "VHVI Fully Synthetic",
   "industry": "",
@@ -1063,7 +1095,7 @@ window.PX98_PRODUCTS = [
   "variant": "CVTF",
   "grade": "",
   "cat": "atf",
-  "catLabel": "Automatic Transmission Fluids",
+  "catLabel": "ATF",
   "type": "Continuously Variable Transmission Fluid",
   "base": "Fully Synthetic",
   "industry": "",
@@ -1089,43 +1121,47 @@ window.PX98_PRODUCTS = [
   "euro": false
  },
  {
-  "id": "50-50-coolant-red",
-  "name": "PX98 50/50 COOLANT RED",
-  "family": "50/50 COOLANT",
-  "variant": "RED",
+  "id": "cool-xtra-30-70-red",
+  "name": "PX98 COOL XTRA 30/70 TROPICAL FORMULA RED COOLANT -15°C",
+  "family": "COOL XTRA 30/70 TROPICAL FORMULA",
+  "variant": "RED COOLANT -15°C",
   "grade": "",
   "cat": "coolant",
-  "catLabel": "Radiator Protection Fluids",
-  "type": "Tropical Long Life Engine Coolant",
-  "base": "Organic Acid Technology (OAT)",
-  "industry": "ASTM D3306, ASTM D4985, ASTM D6210, BS 6580:2010, JIS K2234",
+  "catLabel": "Coolants",
+  "type": "Long Life Coolant",
+  "base": "Ethylene Glycol (EG) + Deionized Water",
+  "industry": "ASTM D3306, BS 6580, JIS K2234",
   "oem": "",
-  "apps": "Modern Passenger Cars, SUVs & Light Commercial Vehicles",
-  "desc": "Formulated with advanced Phosphated Organic Acid Technology (POAT), PX98 50/50 COOLANT RED provides outstanding long-term corrosion protection, exceptional heat transfer efficiency, and reliable freeze and boil-over protection. Its phosphate-enhanced acid formulation minimizes limescale formation while protecting aluminium, cast iron, copper, brass and soldered cooling system components for extended service life in a wide range of modern passenger vehicles.",
+  "apps": "For Multi-Brand Vehicles & Aluminium Cooling Systems",
+  "desc": "Formulated with advanced Phosphated Organic Acid Technology (P-OAT), PX98 COOL XTRA 30/70 TROPICAL FORMULA RED COOLANT -15°C provides outstanding long-term corrosion protection, exceptional heat transfer efficiency, and reliable freeze and boil-over protection. Its phosphate-enhanced acid formulation minimizes limescale formation while protecting aluminium, cast iron, copper, brass and soldered cooling system components for extended service life in a wide range of modern passenger vehicles.",
   "specs": [
    {
     "k": "Technology",
-    "v": "Organic Acid Technology (OAT)"
+    "v": "Phosphated Organic Acid Technology (P-OAT)"
+   },
+   {
+    "k": "Base Type",
+    "v": "Ethylene Glycol (EG) + Deionized Water"
    },
    {
     "k": "Mix Ratio",
-    "v": "Ready-to-Use 50/50 Prediluted"
+    "v": "Ready-to-Use 30/70 Prediluted"
    },
    {
     "k": "Freeze Protection",
-    "v": "-25°C"
+    "v": "-15°C"
    },
    {
     "k": "Service Life",
-    "v": "Up to 250,000 km or 5 Years*"
+    "v": "Up to 5 years or 250,000 km*"
    },
    {
     "k": "Industry Performance Level",
-    "v": "ASTM D3306, ASTM D4985, ASTM D6210, BS 6580:2010, JIS K2234"
+    "v": "ASTM D3306, BS 6580, JIS K2234"
    },
    {
     "k": "Applications",
-    "v": "Modern Passenger Cars, SUVs & Light Commercial Vehicles"
+    "v": "For Multi-Brand Vehicles & Aluminium Cooling Systems"
    }
   ],
   "shot": "",
@@ -1133,43 +1169,47 @@ window.PX98_PRODUCTS = [
   "euro": false
  },
  {
-  "id": "50-50-coolant-blue",
-  "name": "PX98 50/50 COOLANT BLUE",
-  "family": "50/50 COOLANT",
-  "variant": "BLUE",
+  "id": "cool-xtra-30-70-blue",
+  "name": "PX98 COOL XTRA 30/70 TROPICAL FORMULA BLUE COOLANT -15°C",
+  "family": "COOL XTRA 30/70 TROPICAL FORMULA",
+  "variant": "BLUE COOLANT -15°C",
   "grade": "",
   "cat": "coolant",
-  "catLabel": "Radiator Protection Fluids",
-  "type": "Tropical Long Life Engine Coolant",
-  "base": "Organic Acid Technology (OAT)",
-  "industry": "ASTM D3306, ASTM D4985, ASTM D6210, BS 6580:2010",
+  "catLabel": "Coolants",
+  "type": "Long Life Coolant",
+  "base": "Ethylene Glycol (EG) + Deionized Water",
+  "industry": "ASTM D3306, BS 6580, JIS K2234",
   "oem": "",
-  "apps": "Especially for Modern European Passenger Cars & SUVs",
-  "desc": "Formulated with leading Organic Acid Technology (OAT), PX98 50/50 COOLANT BLUE delivers exceptional thermal stability, superior aluminium corrosion protection, and long-lasting cooling system cleanliness. Its cutting-edge formulation provides consistent freeze protection, boil-over resistance, and extended cooling system durability under extended service life and demanding operating conditions.",
+  "apps": "For Multi-Brand Vehicles & Aluminium Cooling Systems",
+  "desc": "Formulated with leading Organic Acid Technology (OAT), PX98 COOL XTRA 30/70 TROPICAL FORMULA BLUE COOLANT -15°C provides outstanding long-term corrosion protection, exceptional heat transfer efficiency, and reliable freeze and boil-over protection. Its cutting-edge formulation provides long-term corrosion protection, boil-over resistance, and extended cooling system durability under extended service life and demanding operating conditions.",
   "specs": [
    {
     "k": "Technology",
     "v": "Organic Acid Technology (OAT)"
    },
    {
+    "k": "Base Type",
+    "v": "Ethylene Glycol (EG) + Deionized Water"
+   },
+   {
     "k": "Mix Ratio",
-    "v": "Ready-to-Use 50/50 Prediluted"
+    "v": "Ready-to-Use 30/70 Prediluted"
    },
    {
     "k": "Freeze Protection",
-    "v": "-25°C"
+    "v": "-15°C"
    },
    {
     "k": "Service Life",
-    "v": "Up to 250,000 km or 5 Years*"
+    "v": "Up to 5 years or 250,000 km*"
    },
    {
     "k": "Industry Performance Level",
-    "v": "ASTM D3306, ASTM D4985, ASTM D6210, BS 6580:2010"
+    "v": "ASTM D3306, BS 6580, JIS K2234"
    },
    {
     "k": "Applications",
-    "v": "Especially for Modern European Passenger Cars & SUVs"
+    "v": "For Multi-Brand Vehicles & Aluminium Cooling Systems"
    }
   ],
   "shot": "",
@@ -1177,43 +1217,47 @@ window.PX98_PRODUCTS = [
   "euro": false
  },
  {
-  "id": "50-50-coolant-green",
-  "name": "PX98 50/50 COOLANT GREEN",
-  "family": "50/50 COOLANT",
-  "variant": "GREEN",
+  "id": "cool-xtra-30-70-green",
+  "name": "PX98 COOL XTRA 30/70 TROPICAL FORMULA GREEN COOLANT -15°C",
+  "family": "COOL XTRA 30/70 TROPICAL FORMULA",
+  "variant": "GREEN COOLANT -15°C",
   "grade": "",
   "cat": "coolant",
-  "catLabel": "Radiator Protection Fluids",
-  "type": "Tropical Long Life Engine Coolant",
-  "base": "Inorganic Organic Acid",
-  "industry": "ASTM D3306, BS 6580:2010, JIS K2234",
+  "catLabel": "Coolants",
+  "type": "Long Life Coolant",
+  "base": "Ethylene Glycol (EG) + Deionized Water",
+  "industry": "ASTM D3306, BS 6580, JIS K2234",
   "oem": "",
-  "apps": "Passenger Cars, SUVs & Light Commercial Vehicles",
-  "desc": "Developed with specialized anti-corrosion and anti-boil inhibitors, PX98 50/50 COOLANT GREEN offers dependable corrosion protection, efficient heat transfer, and reliable anti-boil and anti-freeze performance for a broad spectrum of cooling systems. Its balanced chemical package protects aluminium, cast iron, steel, copper, brass, and soldered components while helping to minimize rust, scale formation, and water pump wear under daily driving conditions.",
+  "apps": "For Multi-Brand Vehicle Applications",
+  "desc": "Developed with specialized anti-corrosion and anti-boil inhibitors, PX98 COOL XTRA 30/70 TROPICAL FORMULA GREEN COOLANT -15°C offers dependable corrosion protection, efficient heat transfer, and reliable anti-boil and anti-freeze performance for a broad spectrum of cooling systems. Its balanced chemical package protects aluminium, cast iron, steel, copper, brass, and soldered components while helping to minimize rust, scale formation, and water pump wear under daily driving conditions.",
   "specs": [
    {
     "k": "Technology",
-    "v": "Inorganic Organic Acid"
+    "v": "Inorganic"
+   },
+   {
+    "k": "Base Type",
+    "v": "Ethylene Glycol (EG) + Deionized Water"
    },
    {
     "k": "Mix Ratio",
-    "v": "Ready-to-Use 50/50 Prediluted"
+    "v": "Ready-to-Use 30/70 Prediluted"
    },
    {
     "k": "Freeze Protection",
-    "v": "-25°C"
+    "v": "-15°C"
    },
    {
     "k": "Service Life",
-    "v": "Up to 150,000 km or 3 Years*"
+    "v": "Up to 5 years or 250,000 km*"
    },
    {
     "k": "Industry Performance Level",
-    "v": "ASTM D3306, BS 6580:2010, JIS K2234"
+    "v": "ASTM D3306, BS 6580, JIS K2234"
    },
    {
     "k": "Applications",
-    "v": "Passenger Cars, SUVs & Light Commercial Vehicles"
+    "v": "For Multi-Brand Vehicle Applications"
    }
   ],
   "shot": "",
@@ -1223,11 +1267,11 @@ window.PX98_PRODUCTS = [
  {
   "id": "super-dot-4-brake-fluid",
   "name": "PX98 SUPER DOT 4 BRAKE FLUID",
-  "family": "SUPER DOT 4",
-  "variant": "BRAKE FLUID",
+  "family": "BRAKE FLUID",
+  "variant": "SUPER DOT 4",
   "grade": "",
   "cat": "service",
-  "catLabel": "Vehicle Service Fluids",
+  "catLabel": "Brake Fluid",
   "type": "Brake Fluid",
   "base": "Synthetic Borate Ester Formula",
   "industry": "FMVSS No.116 DOT 4, SAE J1703/J1704, ISO 4925 Class 3/4, JIS K2233",
@@ -1263,11 +1307,11 @@ window.PX98_PRODUCTS = [
  {
   "id": "modern-dot-5-1-brake-fluid",
   "name": "PX98 MODERN DOT 5.1 BRAKE FLUID",
-  "family": "MODERN DOT 5.1",
-  "variant": "BRAKE FLUID",
+  "family": "BRAKE FLUID",
+  "variant": "MODERN DOT 5.1",
   "grade": "",
   "cat": "service",
-  "catLabel": "Vehicle Service Fluids",
+  "catLabel": "Brake Fluid",
   "type": "Brake Fluid",
   "base": "Synthetic Borate Ester Formula",
   "industry": "FMVSS No.116 DOT 5.1, SAE J1704, ISO 4925 Class 5.1/6, JIS K2233",
@@ -1303,11 +1347,11 @@ window.PX98_PRODUCTS = [
  {
   "id": "engine-cleaning-flush",
   "name": "PX98 ENGINE CLEANING FLUSH",
-  "family": "ENGINE CLEANING FLUSH",
+  "family": "",
   "variant": "",
   "grade": "",
   "cat": "service",
-  "catLabel": "Vehicle Service Fluids",
+  "catLabel": "Brake Fluid",
   "type": "Engine Flush",
   "base": "Rapid Cleaning Detergency Carrier Fluid",
   "industry": "",
@@ -1331,11 +1375,11 @@ window.PX98_PRODUCTS = [
  {
   "id": "engine-performance-treatment",
   "name": "PX98 ENGINE PERFORMANCE TREATMENT",
-  "family": "ENGINE PERFORMANCE TREATMENT",
+  "family": "",
   "variant": "",
   "grade": "",
   "cat": "service",
-  "catLabel": "Vehicle Service Fluids",
+  "catLabel": "Brake Fluid",
   "type": "Engine Oil Additive",
   "base": "Advanced Friction Reduction Technology",
   "industry": "",

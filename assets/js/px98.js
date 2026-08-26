@@ -25,13 +25,15 @@
     { href: 'contact.html',      label: 'Contact',     key: 'contact' }
   ];
 
+  /* The filter names are the client's own folder names, so what the catalogue calls a
+     family and what the artwork drop calls it are the same words. */
   var CATS = [
-    { key: 'pcmo',    label: 'Passenger Car' },
-    { key: 'diesel',  label: 'Commercial Diesel' },
-    { key: 'atf',     label: 'Automatic Transmission' },
-    { key: 'gear',    label: 'Gear Oils' },
+    { key: 'pcmo',    label: 'Passenger Car Engine Oil' },
+    { key: 'diesel',  label: 'Diesel Oil' },
+    { key: 'atf',     label: 'ATF' },
+    { key: 'gear',    label: 'Gear Oil' },
     { key: 'coolant', label: 'Coolants' },
-    { key: 'service', label: 'Service Fluids' }
+    { key: 'service', label: 'Brake Fluid' }
   ];
 
   /* ---------------------------------------------------------
@@ -79,11 +81,9 @@
             '<p>PX98 represents a new generation of premium automotive lubricants developed by PRINCE GLOBAL PTE. LTD.</p>' +
           '</div>' +
           '<div class="foot-col"><h4>Products</h4><ul>' +
-            '<li><a href="products.html?cat=pcmo">Passenger Car Engine Oils</a></li>' +
-            '<li><a href="products.html?cat=diesel">Heavy Duty Diesel Oils</a></li>' +
-            '<li><a href="products.html?cat=atf">Transmission Fluids</a></li>' +
-            '<li><a href="products.html?cat=gear">Gear Oils</a></li>' +
-            '<li><a href="products.html?cat=coolant">Coolants &amp; Maintenance Fluids</a></li>' +
+            CATS.map(function (c) {
+              return '<li><a href="products.html?cat=' + c.key + '">' + c.label + '</a></li>';
+            }).join('') +
           '</ul></div>' +
           '<div class="foot-col"><h4>Company</h4><ul>' +
             '<li><a href="about.html">Who we are</a></li>' +
@@ -332,8 +332,10 @@
    'shift-force-hypoid-gear-sae-90-gl-5', 'shift-force-ep-manual-sae-140-gl-4',
    'shift-force-atf-lv', 'shift-force-atf-mv', 'shift-force-atf-dw-1', 'shift-force-atf-ws',
    'shift-force-ammix-d3-sp', 'shift-force-dctf', 'shift-force-cvtf',
-   '50-50-coolant-red', '50-50-coolant-blue', '50-50-coolant-green',
-   'super-dot-4-brake-fluid', 'modern-dot-5-1-brake-fluid'
+   'shift-force-9hp-pro', 'shift-force-atf-8hp-pro',
+   'cool-xtra-30-70-red', 'cool-xtra-30-70-blue', 'cool-xtra-30-70-green',
+   'super-dot-4-brake-fluid', 'modern-dot-5-1-brake-fluid',
+   'engine-cleaning-flush', 'engine-performance-treatment'
   ].forEach(function (id) { PACKED[id] = 1; });
 
   function packSrc(id) { return 'assets/img/packs/px98/' + id + '.webp'; }
@@ -354,22 +356,24 @@
            '</div>';
   }
 
-  /* Card order is the client's: grade on top, then the series name carrying its
-     viscosity, then the performance designation, then base type and performance
-     level as two labelled facts rather than one run-together mono block. */
+  /* Card order is the client's: the family first and small, then the product's own
+     name carrying the card. SHIFT FORCE, then ATF LV. That name is the grade on an
+     engine oil and the variant on a transmission fluid; the two service products have
+     neither, so the product name itself stands and nothing prints "Fluid" any more.
+     Under it, base type and performance level as two labelled facts. A product whose
+     performance level is a long OEM list drops the row rather than shortening it: the
+     client would rather the list were read whole on the product page. */
   function pcard(p) {
-    var grade = p.grade ? p.grade.replace('SAE ', '') : '';
-    var series = p.family ? (p.family + (p.grade ? ' ' + p.grade : '')) : p.name.replace('PX98 ', '');
+    var name = p.grade || p.variant || p.name.replace('PX98 ', '');
     return '<a class="pcard" href="product.html?id=' + encodeURIComponent(p.id) + '">' +
       '<div class="pcard-top"><span class="pcard-cat">' + esc(p.type) + '</span>' +
         (p.euro ? '<span class="pcard-euro">Euro spec</span>' : '') + '</div>' +
       '<div class="pcard-shot">' + packShot(p) + '</div>' +
-      '<div class="pcard-grade' + (grade ? '' : ' na') + '">' + esc(grade || p.variant || 'Fluid') + '</div>' +
-      '<div class="pcard-name">' + esc(series) + '</div>' +
-      (p.variant ? '<div class="pcard-var">' + esc(p.variant) + '</div>' : '') +
+      (p.family ? '<div class="pcard-fam">' + esc(p.family) + '</div>' : '') +
+      '<div class="pcard-name' + (name.length > 14 ? ' long' : '') + '">' + esc(name) + '</div>' +
       '<dl class="pcard-meta">' +
         '<div><dt>Base type</dt><dd>' + esc(p.base || 'To be confirmed') + '</dd></div>' +
-        '<div><dt>Performance level</dt><dd>' + esc(p.industry || 'To be confirmed') + '</dd></div>' +
+        (p.industry ? '<div><dt>Performance level</dt><dd>' + esc(p.industry) + '</dd></div>' : '') +
       '</dl>' +
     '</a>';
   }

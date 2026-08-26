@@ -28,11 +28,12 @@ python -m http.server 8000     # then visit http://127.0.0.1:8000
 assets/
   css/px98.css        design system + every component
   js/px98.js          nav, reveals, counters, viscosity rail, catalogue, detail
-  js/products.js      the 36-product catalogue, generated from the client's product copy deck
+  js/products.js      the 37-product catalogue, generated from the client's product copy deck
   js/chat.js          PX98 assistant: guided product finder + catalogue search
   img/labels/         flat label artwork; superseded by the pack renders, kept for reference
   img/packs/px98/     the client's pack renders, one file per product id
   img/packs/          the hero lineup, composited from three of those renders
+  img/news/           article thumbnails, packs on the house ink until photography lands
   img/brand/          wordmarks, plus the favicon set
   img/                photography and brand marks
 favicon.ico           16/32/48, the yellow "98" tile
@@ -42,9 +43,20 @@ site.webmanifest      names the 192 and 512 install icons
 ## Product artwork
 
 `assets/img/packs/px98/<product-id>.webp` is the client's own render of that product's
-bottle, from `client_image/PX98 Client Images/` (supplied 25 Aug 2026). **Thirty-two of
-the thirty-six products have a render.** The four without one fall back to a labelled CSS
-plate: 4X4 DIESEL POWER 15W-40, SHIFT FORCE 9HP PRO, and the two engine treatments.
+bottle, from `client_image/PX98 Client Images/` (25 Aug 2026) and `client_latest_amendament/`
+(26 Aug 2026). **Thirty-six of the thirty-seven products have a render.** The one without,
+4X4 DIESEL POWER 15W-40, falls back to a labelled CSS plate.
+
+The 26 Aug four - ATF 8HP PRO, ATF 9HP PRO, ENGINE CLEANING FLUSH and ENGINE PERFORMANCE
+TREATMENT - arrived as bottles on a white studio ground rather than as cut-outs, so
+`key_white()` in the build script lifts them off it and stands them at the same height as
+the rest of the set. It finds the silhouette from row and column spans rather than from
+brightness, because the plastic carries highlights as bright as the ground and the label
+carries white type.
+
+Two crop boxes, not one: the client renders the 7.5L diesel jug slightly smaller than the
+4L passenger car jug, which reads backwards on a shelf. The diesel frames crop tighter so
+that jug stands about 1.14x the height of the 4L, which is what the client asked for.
 
 The set of ids that have a render lives in `PACKED` in `assets/js/px98.js`. The filename is
 always the product id, so adding a pack means dropping the file in and adding one id.

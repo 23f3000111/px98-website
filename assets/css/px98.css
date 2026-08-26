@@ -186,15 +186,15 @@ ul { list-style: none; }
 /* The image URL lives here, not in an inline style: a url() inside a custom
    property resolves against the stylesheet that consumes it, so an HTML-relative
    path would 404. Swap a photo by editing one line below. */
-.shot--workshop     { --shot: url("../img/scene-workshop.jpg"); }
-.shot--performance  { --shot: url("../img/performance-racecar-98.jpg"); }
-.shot--distribution { --shot: url("../img/distribution-supercar.jpg"); }
-.shot--about        { --shot: url("../img/about-supercar-98.jpg"); }
-.shot--technology   { --shot: url("../img/technology-supra.jpg"); }
-.shot--products     { --shot: url("../img/products-supercar.jpg"); }
+/* Each frame is cut to the shape of the section that shows it and composed with the
+   car clear of whatever sits over the foot of it, so these want no --shot-pos beyond
+   the centre. tools/build-images.py holds the crops. */
+.shot--about        { --shot: url("../img/about-defender.jpg"); }
+.shot--about-speed  { --shot: url("../img/about-tunnel-speed.jpg"); }
+.shot--technology   { --shot: url("../img/technology-roadster.jpg"); }
+.shot--products     { --shot: url("../img/products-sedan-highway.jpg"); }
 .shot--why98        { --shot: url("../img/why-supercar-98.jpg"); }
 .shot--tech-city    { --shot: url("../img/tech-supra-city.jpg"); }
-.shot--about-speed  { --shot: url("../img/about-supra-speed.jpg"); }
 .shot--coastal98    { --shot: url("../img/distributors-coastal-98.jpg"); }
 
 /* ---------- drawn section grounds ----------
@@ -729,6 +729,13 @@ ul { list-style: none; }
 .rcard:hover::before { transform: scaleX(1); }
 /* flex + max-height, not grid + height:100% — a centred grid item auto-sizes its
    track, which leaves a percentage height indefinite and the pack overflows */
+/* Article thumbnails. The client has no editorial photography yet, so these are the
+   approved packs on the house ink; they drop straight out when pictures arrive. */
+/* height:auto or the width/height attributes on the tag win over the aspect ratio
+   and the thumbnail lands 900px tall in a 380px column. */
+.news-shot { width: 100%; height: auto; aspect-ratio: 16/9; object-fit: cover; display: block;
+  margin-bottom: 20px; border: 1px solid var(--hair-d); }
+
 .rcard-shot { height: 176px; display: flex; align-items: center; justify-content: center; margin: 6px 0 20px; }
 .rcard-shot img { max-height: 100%; width: auto; object-fit: contain; filter: drop-shadow(0 16px 26px rgba(0,0,0,.6));
   transition: transform .6s var(--e-out); }
@@ -787,14 +794,16 @@ ul { list-style: none; }
 .pcard-shot { height: 184px; display: flex; align-items: center; justify-content: center; margin: 14px 0 16px; }
 .pcard-shot img { max-height: 100%; width: auto; object-fit: contain; filter: drop-shadow(0 14px 22px rgba(0,0,0,.55)); transition: transform .55s var(--e-out); }
 .pcard:hover .pcard-shot img { transform: scale(1.05) translateY(-4px); }
-.pcard-grade { font-family: var(--fd); font-weight: 900; font-style: italic; font-stretch: 82%;
-  font-size: 30px; line-height: .95; letter-spacing: -.035em; color: var(--y); }
-.pcard-grade.na { font-size: 20px; color: var(--white); font-style: normal; font-weight: 800; }
-.pcard-name { font-family: var(--fd); font-weight: 700; font-stretch: 92%; text-transform: uppercase;
-  font-size: 15px; line-height: 1.14; margin: 7px 0 3px; color: var(--white); }
-/* the performance designation, on its own line under the series name */
-.pcard-var { font-family: var(--fd); font-weight: 700; font-stretch: 92%; text-transform: uppercase;
-  font-size: 13px; line-height: 1.2; color: rgba(255,255,255,.6); margin-bottom: 14px; }
+/* The client's naming order: the family reads first and small, the product's own
+   name carries the card underneath it. SHIFT FORCE, then ATF LV. */
+.pcard-fam { font-family: var(--fd); font-weight: 700; font-stretch: 92%; text-transform: uppercase;
+  font-size: 12.5px; line-height: 1.2; letter-spacing: .04em; color: rgba(255,255,255,.62); }
+.pcard-name { font-family: var(--fd); font-weight: 900; font-style: italic; font-stretch: 82%;
+  font-size: 26px; line-height: .98; letter-spacing: -.012em; word-spacing: .14em;
+  text-transform: uppercase; color: var(--y); margin: 5px 0 14px; }
+/* A name that runs to several words is a sentence, not a badge, so it drops the
+   italic and sets smaller: COOL XTRA reads, RED COOLANT -15C reads. */
+.pcard-name.long { font-size: 18px; font-style: normal; font-weight: 800; line-height: 1.12; letter-spacing: -.01em; }
 
 /* Base type and performance level, labelled. They used to run together as one
    unlabelled mono block, which the client could not read as two separate facts. */
@@ -802,9 +811,8 @@ ul { list-style: none; }
 .pcard-meta dt { font-family: var(--fm); font-size: 9px; letter-spacing: .17em; text-transform: uppercase; color: var(--grey-2); }
 .pcard-meta dd { font-size: 12.5px; line-height: 1.45; color: rgba(255,255,255,.82); margin-top: 3px; }
 
-/* CSS pack plate. Twenty-nine of the thirty-six products now carry their approved
-   label artwork; this stands in for the seven that have none yet: 4X4 DIESEL POWER
-   15W-40, SHIFT FORCE 9HP PRO, the three coolants and the two engine treatments. */
+/* CSS pack plate. Thirty-six of the thirty-seven products now carry the client's own
+   pack render; this stands in for the one that has none yet, 4X4 DIESEL POWER 15W-40. */
 .plate-pack {
   position: relative; width: 96px; height: 150px; background: linear-gradient(155deg, #1d2126, #0b0d0f 70%);
   box-shadow: inset 0 0 0 1px var(--hair-d-2); border-radius: 5px 5px 3px 3px; overflow: hidden;
