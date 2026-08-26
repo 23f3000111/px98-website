@@ -37,6 +37,10 @@
   --pad-x: 44px;
   --max: 1400px;
   --notch: 26px;
+  /* The height #top-nav settles at once it takes .stuck. Anything that has to park
+     under the bar, or scroll something clear of it, reads this rather than its own
+     copy of the number. */
+  --stick: 84px;
 
   --hatch: repeating-linear-gradient(-45deg,
             rgba(255,255,255,.035) 0 1px, transparent 1px 9px);
@@ -54,7 +58,10 @@ body {
   font-size: 16px;
   line-height: 1.65;
   font-weight: 350;
+  /* clip does what hidden did here without turning the body into a scrollport, which
+     is what a position:sticky descendant needs. hidden stays as the fallback. */
   overflow-x: hidden;
+  overflow-x: clip;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -749,7 +756,19 @@ ul { list-style: none; }
 .rcard:hover .rcard-go svg { transform: translateX(5px); }
 
 /* ---------- catalogue grid ---------- */
-.cat-bar { display: flex; flex-wrap: wrap; gap: 22px; align-items: flex-end; justify-content: space-between; padding-bottom: 20px; border-bottom: 1px solid var(--hair-d); }
+/* The filter bar follows the catalogue down and parks under the nav, so a category is
+   always one click away however far into the grid you are. It stops at --stick, the
+   height #top-nav settles at once it takes .stuck, which it always has by the time the
+   bar reaches it. The bar is the same width as the grid beneath it, so its own ground
+   covers the cards passing under without needing to bleed past the wrap. */
+.cat-bar {
+  position: sticky; top: var(--stick); z-index: 40;
+  display: flex; flex-wrap: wrap; gap: 22px; align-items: flex-end; justify-content: space-between;
+  padding-block: 16px 18px; border-bottom: 1px solid var(--hair-d);
+  background: rgba(8,9,10,.92);
+  backdrop-filter: blur(18px) saturate(1.4);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+}
 .filters { display: flex; flex-wrap: wrap; gap: 7px; }
 .filter {
   --notch: 8px; background: transparent; border: 0; cursor: pointer;

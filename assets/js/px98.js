@@ -389,6 +389,23 @@
       q: params.get('q') || ''
     };
 
+    /* Picking a category from halfway down the grid used to leave you staring at the
+       gap where a longer list had been. The results start at their own top instead,
+       with the filter bar parked where it sticks and the first row just under it.
+       It only ever scrolls up: clicking from the head of the page should not drag the
+       page header out of view. */
+    function toTopOfResults() {
+      var barEl = $('.cat-bar');
+      if (!barEl) return;
+      var stick = parseFloat(getComputedStyle(document.documentElement)
+                    .getPropertyValue('--stick')) || 84;
+      var top = grid.getBoundingClientRect().top + window.scrollY
+                - stick - barEl.offsetHeight - 14;
+      if (window.scrollY > top) {
+        window.scrollTo({ top: Math.max(top, 0), behavior: REDUCED ? 'auto' : 'smooth' });
+      }
+    }
+
     /* Product counts have come off the filters at the client's request, here and on
        the home range cards. */
     var bar = $('#filters');
@@ -401,6 +418,7 @@
       $$('.filter', bar).forEach(function (b) {
         b.addEventListener('click', function () {
           state.cat = b.dataset.cat; state.grade = ''; draw();
+          toTopOfResults();
         });
       });
     }
