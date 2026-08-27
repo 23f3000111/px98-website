@@ -1,0 +1,5 @@
+# The deployment is the site. The build script and the notes about it are not part
+# of it, and neither is anything the repo already keeps out.
+tools/
+README.md
+.gitignore

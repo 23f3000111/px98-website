@@ -24,16 +24,28 @@ python -m http.server 8000     # then visit http://127.0.0.1:8000
 
 ## Where it is served
 
-`CNAME` at the repo root is what points GitHub Pages at the client's own domain,
-**px98lubricants.com**. Deleting or renaming that file drops the site back to
-`23f3000111.github.io/px98-website/`, so leave it alone.
+**Vercel**, from this repo's `main` branch, at **px98lubricants.com**.
 
-Every path in the site is relative, so it runs the same from a sub-path, from a root
-domain, or straight off the filesystem with no server at all.
+`vercel.json` is the whole deployment: no build step, no framework, every file served
+statically from the repo root. Two things in it are deliberate.
 
-The domain is registered with GoDaddy. It needs four A records on the apex pointing at
-185.199.108.153, .109.153, .110.153 and .111.153, and a CNAME on `www` pointing at
-`23f3000111.github.io`.
+`cleanUrls` is off. Every link in the site is written with its `.html` extension, so
+turning clean URLs on would put a 301 in front of every internal navigation for no gain.
+
+Everything is sent `max-age=0, must-revalidate`. That is not what you want at launch,
+but it is exactly what you want while the client is reviewing: a redeploy is visible on
+the next refresh instead of hiding behind a browser cache. Revalidation costs a 304, and
+Vercel serves it from the edge. Tighten it when the copy and the photography are signed
+off - images to a year, CSS and JS to an hour, HTML left as it is.
+
+GitHub Pages still builds the same branch at `23f3000111.github.io/px98-website/` and is
+useful as a second opinion when something looks wrong on the live domain. It no longer
+claims the custom domain: the `CNAME` file that used to do that is gone, because two
+hosts cannot both answer for px98lubricants.com. Its certificate request for the domain
+never left the `new` state after several hours, which is what moved the site to Vercel.
+
+Every path in the site is relative, so it runs the same from a sub-path, from the root of
+a domain, or straight off the filesystem with no server at all.
 
 ## Structure
 
