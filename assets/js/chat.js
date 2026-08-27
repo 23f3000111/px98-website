@@ -166,7 +166,7 @@
     }
     if (/open distributor form/.test(t)) { window.location.href = 'distributors.html'; return { text: 'Opening the distributor form.' }; }
     if (/contact|email|phone|call|reach|address|talk to a person|human/.test(t)) {
-      return { text: 'The export team in Singapore handles product, technical and distribution enquiries. The <a href="contact.html">contact page</a> has the form. Contact details are placeholder in this mockup.',
+      return { text: 'The export team in Singapore handles product, technical and distribution enquiries. The <a href="contact.html">contact page</a> has the form.',
                chips: ['Open contact form', 'Find my oil'] };
     }
     if (/open contact form/.test(t)) { window.location.href = 'contact.html'; return { text: 'Opening the contact form.' }; }
@@ -371,7 +371,7 @@
           '<svg viewBox="0 0 16 9" aria-hidden="true"><path d="M0 4.5h13M9.5 1l3.5 3.5L9.5 8" stroke="currentColor" stroke-width="1.6" fill="none"/></svg>' +
         '</button>' +
       '</form>' +
-      '<div class="chat-foot">Mockup assistant. Searches the catalogue on this device.</div>';
+      '<div class="chat-foot">Searches the PX98 catalogue on this device.</div>';
     document.body.appendChild(panel);
 
     log = panel.querySelector('#chat-log');

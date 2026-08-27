@@ -47,6 +47,32 @@ never left the `new` state after several hours, which is what moved the site to 
 Every path in the site is relative, so it runs the same from a sub-path, from the root of
 a domain, or straight off the filesystem with no server at all.
 
+## Still to come from the client
+
+Everything below is wired and waiting on real values. `SITE` at the top of
+`assets/js/px98.js` is the only place any of it is written down. **A field left empty
+is not rendered at all** - no placeholder, no fake address, no link that goes nowhere -
+so the site is safe to leave live while these are outstanding.
+
+| Field | What it turns on |
+|---|---|
+| `email` | The email row on the contact page, and the mail fallback both forms use |
+| `phone` | The phone row on the contact page |
+| `address` | The address row on the contact page |
+| `formEndpoint` | Real submission for both enquiry forms |
+| `social[].url` | The FB / IG / YT / IN links in the footer |
+
+`formEndpoint` takes any service that accepts a plain multipart form POST - Formspree,
+Basin, Web3Forms. Both forms already carry proper `name` attributes and a `data-subject`,
+so nothing else has to change. Until it is set, a form with `email` filled in hands the
+enquiry to the visitor's mail client, and with neither it says enquiries are not open
+rather than pretending to have sent something.
+
+Two other things need a decision rather than a value. The three articles under Latest
+News are cards without pages behind them, so they are not links; say the word and they
+become real pages. And the contact page has no map, because there is no address to put
+on one.
+
 ## Structure
 
 ```

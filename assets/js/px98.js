@@ -14,6 +14,26 @@
     });
   };
 
+  /* The details that are the client's to supply. Anything left empty is not rendered
+     at all: a live site should show nothing rather than a placeholder, a fake address
+     or a link that goes nowhere. Fill these in and the footer, the contact page and
+     both enquiry forms pick them up with no other change. */
+  var SITE = {
+    email:   '',
+    phone:   '',
+    address: '',
+    /* Where the two enquiry forms POST. Anything that accepts a plain multipart form
+       POST works: Formspree, Basin, Web3Forms. With none set the forms hand off to the
+       visitor's mail client if there is an address above, and say so plainly if not. */
+    formEndpoint: '',
+    social: [
+      { label: 'FB', name: 'Facebook',  url: '' },
+      { label: 'IG', name: 'Instagram', url: '' },
+      { label: 'YT', name: 'YouTube',   url: '' },
+      { label: 'IN', name: 'LinkedIn',  url: '' }
+    ]
+  };
+
   var CHEV = '<svg class="chev" viewBox="0 0 16 9" aria-hidden="true"><path d="M0 4.5h13M9.5 1l3.5 3.5L9.5 8" stroke="currentColor" stroke-width="1.4" fill="none"/></svg>';
 
   var NAV = [
@@ -100,17 +120,14 @@
         '<div class="foot-base">' +
           '<p>&copy; ' + new Date().getFullYear() + ' Prince Global Pte. Ltd. \u00b7 Performance excellence since 1998</p>' +
           '<div class="foot-social">' +
-            '<a href="#" aria-label="Facebook">FB</a>' +
-            '<a href="#" aria-label="Instagram">IG</a>' +
-            '<a href="#" aria-label="YouTube">YT</a>' +
-            '<a href="#" aria-label="LinkedIn">IN</a>' +
+            SITE.social.filter(function (n) { return n.url; }).map(function (n) {
+              return '<a href="' + esc(n.url) + '" target="_blank" rel="noopener"' +
+                     ' aria-label="' + esc(n.name) + '">' + esc(n.label) + '</a>';
+            }).join('') +
           '</div>' +
         '</div>' +
       '</div></footer>' +
-      '<button id="totop" aria-label="Back to top"><svg viewBox="0 0 16 9" aria-hidden="true"><path d="M0 4.5h13M9.5 1l3.5 3.5L9.5 8" stroke="currentColor" stroke-width="1.6" fill="none"/></svg></button>' +
-      '<aside id="mock-note"><button aria-label="Dismiss">&times;</button>' +
-        '<b>Presentation mockup</b> Packs are the approved PX98 renders supplied by the client. Automotive photography is from the client sample set and is not final.' +
-      '</aside>';
+      '<button id="totop" aria-label="Back to top"><svg viewBox="0 0 16 9" aria-hidden="true"><path d="M0 4.5h13M9.5 1l3.5 3.5L9.5 8" stroke="currentColor" stroke-width="1.6" fill="none"/></svg></button>';
   }
 
   /* ---------------------------------------------------------
@@ -131,14 +148,13 @@
 
   function chrome() {
     var nav = $('#top-nav'), totop = $('#totop');
-    var burger = $('#burger'), drawer = $('#drawer'), note = $('#mock-note');
+    var burger = $('#burger'), drawer = $('#drawer');
 
-    /* The nav condense, the back-to-top button and the mockup badge used to share a
-       scroll listener that also drove the hero parallax and the progress bar. The
-       parallax went with the hero photograph and the progress bar is a CSS scroll
-       timeline now, so all that is left are three depth thresholds. */
+    /* The nav condense and the back-to-top button used to share a scroll listener that
+       also drove the hero parallax and the progress bar. The parallax went with the
+       hero photograph and the progress bar is a CSS scroll timeline now, so all that is
+       left are two depth thresholds. */
     if (nav) depthGate(24, function (on) { nav.classList.toggle('stuck', on); });
-    if (note) depthGate(220, function (on) { note.classList.toggle('on', on); });
     if (totop) depthGate(640, function (on) { totop.classList.toggle('on', on); });
 
     if (burger && drawer) {
@@ -157,7 +173,6 @@
       window.scrollTo({ top: 0, behavior: REDUCED ? 'auto' : 'smooth' });
     });
 
-    if (note) $('button', note).addEventListener('click', function () { note.remove(); });
   }
 
   function reveals() {
@@ -317,8 +332,8 @@
   /* Products the client has supplied a pack render for. The file is always
      assets/img/packs/px98/<id>.webp, so the id is the whole mapping. These are the
      client's own renders of the finished bottle and they replace the flat label
-     artwork the mockup used to carry. Four of the thirty-six have no render yet and
-     fall through to the CSS plate. */
+     flat label artwork this site used to carry. Only 4X4 Diesel Power 15W-40 has no
+     render yet, and it falls through to the CSS plate. */
   var PACKED = {};
   ['eco-power-sae-0w-20-sp-rc-gf-6a', 'eco-power-sae-0w-30-sp-rc-gf-6a',
    'eco-power-sae-5w-30-sp-rc-gf-6a', 'turbo-power-sae-5w-40-sp', 'turbo-power-sae-5w-50-sp',
@@ -483,9 +498,6 @@
     host.innerHTML =
       '<div class="pd-shot" data-rv="l">' +
         '<div class="pd-stage">' + packShot(p) + '</div>' +
-        '<div class="mono" style="margin-top:14px;font-size:9.5px">' +
-          (PACKED[p.id] ? 'Approved pack artwork' : 'Representative pack, artwork in production') +
-        '</div>' +
       '</div>' +
       '<div class="pd-body" data-rv>' +
         '<a class="pd-back" href="products.html?cat=' + p.cat + '">' +
@@ -514,17 +526,73 @@
   }
 
   /* ---------------------------------------------------------
-     Forms: mockup only, nothing is sent anywhere
+     Contact details
      --------------------------------------------------------- */
+  /* A row whose value the client has not supplied is removed rather than filled with
+     something invented. Better a shorter list than a wrong phone number. */
+  function details() {
+    $$('[data-site-row]').forEach(function (row) {
+      var key = row.getAttribute('data-site-row');
+      var val = SITE[key];
+      var cell = $('[data-site]', row);
+      if (!val) { row.remove(); return; }
+      if (!cell) return;
+      if (key === 'email') {
+        cell.innerHTML = '<a href="mailto:' + esc(val) + '">' + esc(val) + '</a>';
+      } else if (key === 'phone') {
+        cell.innerHTML = '<a href="tel:' + esc(val.replace(/[^\d+]/g, '')) + '">' + esc(val) + '</a>';
+      } else {
+        cell.textContent = val;
+      }
+    });
+  }
+
+  /* ---------------------------------------------------------
+     Enquiry forms
+     --------------------------------------------------------- */
+  /* Posts to whatever endpoint SITE.formEndpoint names - any service that takes a
+     plain form POST. With none set the enquiry is handed to the visitor's mail client
+     instead, which still reaches someone, and if there is no address either the form
+     says so rather than pretending to have sent anything. */
+  function mailto(f) {
+    var lines = [];
+    $$('input, select, textarea', f).forEach(function (el) {
+      if (!el.name || !el.value) return;
+      var label = $('label[for="' + el.id + '"]', f);
+      lines.push((label ? label.textContent : el.name) + ': ' + el.value);
+    });
+    return 'mailto:' + SITE.email +
+           '?subject=' + encodeURIComponent(f.dataset.subject || 'Website enquiry') +
+           '&body=' + encodeURIComponent(lines.join('\n'));
+  }
+
   function forms() {
-    $$('form[data-mock]').forEach(function (f) {
+    $$('form.form').forEach(function (f) {
       f.addEventListener('submit', function (e) {
         e.preventDefault();
         var btn = $('button[type=submit]', f);
-        if (!btn) return;
+        if (!btn || !f.reportValidity()) return;
         var was = btn.innerHTML;
-        btn.innerHTML = '<span>Received. This is a mockup.</span>';
-        setTimeout(function () { btn.innerHTML = was; }, 2600);
+        var say = function (m) { btn.innerHTML = '<span>' + m + '</span>'; };
+        var reset = function () { setTimeout(function () { btn.innerHTML = was; }, 3600); };
+
+        if (SITE.formEndpoint) {
+          say('Sending…');
+          fetch(SITE.formEndpoint, {
+            method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(f)
+          }).then(function (r) {
+            if (!r.ok) throw new Error(r.status);
+            say('Thank you. We will be in touch.');
+            f.reset();
+          }).catch(function () {
+            say('That did not send. Please try again.');
+            reset();
+          });
+          return;
+        }
+        if (SITE.email) { window.location.href = mailto(f); return; }
+        say('Enquiries are not open yet.');
+        reset();
       });
     });
   }
@@ -537,6 +605,7 @@
     rail();
     catalogue();
     detail();
+    details();
     reveals();
     counters();
     magnets();

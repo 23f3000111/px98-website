@@ -5,6 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Contact - PX98</title>
 <meta name="description" content="Contact PX98, a brand of PRINCE GLOBAL PTE. LTD., Singapore. Product enquiries, technical support, distribution and general enquiries.">
+<link rel="canonical" href="https://www.px98lubricants.com/contact.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PX98">
+<meta property="og:locale" content="en_SG">
+<meta property="og:url" content="https://www.px98lubricants.com/contact.html">
+<meta property="og:title" content="Contact - PX98">
+<meta property="og:description" content="Contact PX98, a brand of PRINCE GLOBAL PTE. LTD., Singapore. Product enquiries, technical support, distribution and general enquiries.">
+<meta property="og:image" content="https://www.px98lubricants.com/assets/img/brand/og-share.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="PX98 premium automotive lubricants">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Contact - PX98">
+<meta name="twitter:description" content="Contact PX98, a brand of PRINCE GLOBAL PTE. LTD., Singapore. Product enquiries, technical support, distribution and general enquiries.">
+<meta name="twitter:image" content="https://www.px98lubricants.com/assets/img/brand/og-share.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,400..900;1,62..125,400..900&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -36,36 +51,33 @@
   </div>
 </section>
 
-<section class="sect">
+<section class="sect" id="find">
   <div class="wrap">
     <div class="split">
       <div data-rv="l">
         <span class="eyebrow">Contact details</span>
         <h2 class="d3" style="margin:18px 0 26px">Prince Global Pte. Ltd.</h2>
         <dl class="spec-list">
-          <div class="spec-row"><dt>Head office</dt><dd>Singapore<br><span class="mono" style="font-size:10px">Full address to be supplied</span></dd></div>
-          <div class="spec-row"><dt>Email</dt><dd>enquiry@px98.com <span class="mono" style="font-size:10px">· placeholder</span></dd></div>
-          <div class="spec-row"><dt>Phone</dt><dd>+65 0000 0000 <span class="mono" style="font-size:10px">· placeholder</span></dd></div>
+          <div class="spec-row"><dt>Head office</dt><dd>Singapore</dd></div>
+          <div class="spec-row" data-site-row="address"><dt>Address</dt><dd data-site="address"></dd></div>
+          <div class="spec-row" data-site-row="email"><dt>Email</dt><dd data-site="email"></dd></div>
+          <div class="spec-row" data-site-row="phone"><dt>Phone</dt><dd data-site="phone"></dd></div>
           <div class="spec-row"><dt>Hours</dt><dd>Monday to Friday, 09:00 to 18:00 SGT</dd></div>
           <div class="spec-row"><dt>Brand</dt><dd>PX98, another brand by Prince Lubricants</dd></div>
         </dl>
-
-        <div class="ph ph--16x9 notch" style="margin-top:32px" id="find">
-          <div class="ph-label"><b>Map placeholder</b><span>Head office location · 16:9</span></div>
-        </div>
       </div>
 
       <div class="split-a" data-rv="r">
-        <form class="form" data-mock novalidate>
+        <form class="form" data-subject="PX98 website enquiry" novalidate>
           <div class="form-2">
-            <div class="field"><label for="c-first">First name</label><input id="c-first" type="text" placeholder="Jane" required></div>
-            <div class="field"><label for="c-last">Last name</label><input id="c-last" type="text" placeholder="Tan" required></div>
+            <div class="field"><label for="c-first">First name</label><input id="c-first" name="first-name" type="text" placeholder="Jane" required></div>
+            <div class="field"><label for="c-last">Last name</label><input id="c-last" name="last-name" type="text" placeholder="Tan" required></div>
           </div>
-          <div class="field"><label for="c-email">Email</label><input id="c-email" type="email" placeholder="you@company.com" required></div>
-          <div class="field"><label for="c-company">Company</label><input id="c-company" type="text" placeholder="Company name"></div>
+          <div class="field"><label for="c-email">Email</label><input id="c-email" name="email" type="email" placeholder="you@company.com" required></div>
+          <div class="field"><label for="c-company">Company</label><input id="c-company" name="company" type="text" placeholder="Company name"></div>
           <div class="field">
             <label for="c-topic">What is this about?</label>
-            <select id="c-topic">
+            <select id="c-topic" name="topic">
               <option>Product enquiry</option>
               <option>Technical specification</option>
               <option>Distribution partnership</option>
@@ -73,11 +85,10 @@
               <option>General enquiry</option>
             </select>
           </div>
-          <div class="field"><label for="c-msg">Message</label><textarea id="c-msg" placeholder="Vehicle, approval or grade you are matching. The more specific the better."></textarea></div>
+          <div class="field"><label for="c-msg">Message</label><textarea id="c-msg" name="message" placeholder="Vehicle, approval or grade you are matching. The more specific the better."></textarea></div>
           <button class="btn btn--y" type="submit"><span>Send message</span>
             <svg class="chev" viewBox="0 0 16 9" aria-hidden="true"><path d="M0 4.5h13M9.5 1l3.5 3.5L9.5 8" stroke="currentColor" stroke-width="1.4" fill="none"/></svg>
           </button>
-          <p class="form-note">Mockup form. Nothing is sent.</p>
         </form>
       </div>
     </div>
