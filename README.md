@@ -22,6 +22,19 @@ python -m http.server 8000     # then visit http://127.0.0.1:8000
 | `distributors.html` | Distributor proposition and enquiry form |
 | `contact.html` | Contact details and enquiry form |
 
+## Where it is served
+
+`CNAME` at the repo root is what points GitHub Pages at the client's own domain,
+**px98lubricants.com**. Deleting or renaming that file drops the site back to
+`23f3000111.github.io/px98-website/`, so leave it alone.
+
+Every path in the site is relative, so it runs the same from a sub-path, from a root
+domain, or straight off the filesystem with no server at all.
+
+The domain is registered with GoDaddy. It needs four A records on the apex pointing at
+185.199.108.153, .109.153, .110.153 and .111.153, and a CNAME on `www` pointing at
+`23f3000111.github.io`.
+
 ## Structure
 
 ```
