@@ -218,7 +218,7 @@
     var art = src
       ? '<img src="' + src + '" alt="">'
       : '<span class="chat-hit-fallback"></span>';
-    return '<a class="chat-hit" href="product.html?id=' + encodeURIComponent(p.id) + '">' +
+    return '<a class="chat-hit" href="product-' + encodeURIComponent(p.id) + '.html">' +
       '<span class="chat-hit-img">' + art + '</span>' +
       '<span class="chat-hit-txt">' +
         '<span class="chat-hit-g">' + esc(grade) + '</span>' +

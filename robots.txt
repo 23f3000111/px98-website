@@ -1,4 +1,72 @@
+# PX98 - https://www.px98lubricants.com
+# Everything on this site is public product information and all of it may be
+# crawled. The rules below only name the crawlers explicitly so that a change of
+# policy has somewhere obvious to go; none of them is a restriction.
+
 User-agent: *
+Allow: /
+
+# The old query-string product route. It 308s to the product's own page, so it is
+# kept out of the crawl budget rather than followed 37 times to the same places.
+Disallow: /product.html?id=
+
+# --- Answer engines -----------------------------------------------------------
+# These crawlers feed AI answers and AI search results, and several of them are
+# separate from the crawler that feeds the same company's search index. They are
+# welcomed explicitly: a brand this new is more likely to be found through an
+# assistant than through a ranked result, and none of them executes JavaScript,
+# which is why the product pages, the navigation and the footer are now static
+# HTML rather than drawn on the client.
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: cohere-ai
 Allow: /
 
 Sitemap: https://www.px98lubricants.com/sitemap.xml

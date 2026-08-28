@@ -1135,6 +1135,28 @@ footer { background: var(--ink-1); border-top: 1px solid var(--hair-d); padding-
 }
 
 /* ============================================================
+   FAQ
+   Question-and-answer copy, set as running text rather than an accordion.
+   An answer engine quotes what it can read, and a collapsed panel is one more
+   thing between the question and the answer for no gain on a page this short.
+   ============================================================ */
+.faq-group { margin: 56px 0 20px; }
+.faq-group:first-of-type { margin-top: 0; }
+.faq-group h2 { color: var(--white); }
+
+.faq { border-top: 1px solid var(--hair-d); }
+.faq-item { padding: 26px 0; border-bottom: 1px solid var(--hair-d); }
+.faq-item h3 {
+  font-family: var(--fd); font-weight: 700; font-stretch: 92%;
+  font-size: clamp(17px, 1.35vw, 21px); line-height: 1.2;
+  letter-spacing: -.008em; color: var(--white);
+  margin-bottom: 12px; max-width: 46ch;
+}
+.faq-item p { color: rgba(255,255,255,.66); max-width: 74ch; font-size: 15.5px; }
+.faq-item a { color: var(--y); text-decoration: none; border-bottom: 1px solid rgba(255,210,0,.34); }
+.faq-item a:hover { border-bottom-color: var(--y); }
+
+/* ============================================================
    REDUCED MOTION
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {

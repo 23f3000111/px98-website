@@ -71,6 +71,7 @@
   function buildNav(page) {
     var host = $('#site-nav');
     if (!host) return;
+    if (host.firstElementChild) return;   // static nav already in the page
     host.innerHTML =
       '<div id="scan"></div>' +
       '<header id="top-nav"><div class="nav-in">' +
@@ -93,6 +94,11 @@
   function buildFoot() {
     var host = $('#site-foot');
     if (!host) return;
+    if (host.firstElementChild) {          // static footer already in the page
+      var y = $('#foot-year');
+      if (y) y.textContent = new Date().getFullYear();
+      return;
+    }
     host.innerHTML =
       '<footer><div class="wrap">' +
         '<div class="foot-grid">' +
@@ -380,7 +386,7 @@
      client would rather the list were read whole on the product page. */
   function pcard(p) {
     var name = p.grade || p.variant || p.name.replace('PX98 ', '');
-    return '<a class="pcard" href="product.html?id=' + encodeURIComponent(p.id) + '">' +
+    return '<a class="pcard" href="product-' + encodeURIComponent(p.id) + '.html">' +
       '<div class="pcard-top"><span class="pcard-cat">' + esc(p.type) + '</span>' +
         (p.euro ? '<span class="pcard-euro">Euro spec</span>' : '') + '</div>' +
       '<div class="pcard-shot">' + packShot(p) + '</div>' +
@@ -486,6 +492,7 @@
   function detail() {
     var host = $('#pdetail');
     if (!host || !window.PX98_PRODUCTS) return;
+    if (host.firstElementChild) return;   // a generated product page, already written out
     var id = new URLSearchParams(window.location.search).get('id');
     var all = window.PX98_PRODUCTS;
     var p = all.filter(function (x) { return x.id === id; })[0] || all[0];

@@ -3,68 +3,41 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Product - PX98</title>
-<meta name="description" content="PX98 product specification: viscosity grade, base oil technology, industry and OEM performance levels, and recommended applications.">
-<link rel="canonical" href="https://www.px98lubricants.com/product.html">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="PX98">
-<meta property="og:locale" content="en_SG">
-<meta property="og:url" content="https://www.px98lubricants.com/product.html">
-<meta property="og:title" content="Product - PX98">
-<meta property="og:description" content="PX98 product specification: viscosity grade, base oil technology, industry and OEM performance levels, and recommended applications.">
-<meta property="og:image" content="https://www.px98lubricants.com/assets/img/brand/og-share.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="PX98 premium automotive lubricants">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Product - PX98">
-<meta name="twitter:description" content="PX98 product specification: viscosity grade, base oil technology, industry and OEM performance levels, and recommended applications.">
-<meta name="twitter:image" content="https://www.px98lubricants.com/assets/img/brand/og-share.jpg">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,400..900;1,62..125,400..900&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="icon" href="favicon.ico" sizes="16x16 32x32 48x48">
-<link rel="icon" href="assets/img/brand/favicon-16.png" type="image/png" sizes="16x16">
-<link rel="icon" href="assets/img/brand/favicon-32.png" type="image/png" sizes="32x32">
-<link rel="apple-touch-icon" href="assets/img/brand/apple-touch-icon.png">
-<link rel="manifest" href="site.webmanifest">
-<meta name="theme-color" content="#08090a">
+<title>Redirecting to the product - PX98</title>
+<!-- Every product has its own page now: product-<id>.html, written out by
+     tools/build-seo.js. This file is what is left of the old ?id= route, kept so
+     that a bookmark, a shared link or an already-crawled URL still lands on the
+     right product instead of a 404.
+
+     On Vercel it is rarely reached at all: vercel.json turns /product.html?id=x
+     into a 308 to /product-x.html, which is the redirect Google wants to see and
+     which passes the link equity on. The script below is the fallback for
+     everywhere else - GitHub Pages, a plain static server, the filesystem - where
+     no redirect rule exists.
+
+     noindex, follow: nothing here is worth a result of its own, but the crawler
+     should still walk through to the product page it points at. -->
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://www.px98lubricants.com/products.html">
 <link rel="stylesheet" href="assets/css/px98.css">
+<script>
+(function () {
+  var id = new URLSearchParams(window.location.search).get('id');
+  var to = id && /^[a-z0-9-]+$/.test(id) ? 'product-' + id + '.html' : 'products.html';
+  window.location.replace(to);
+})();
+</script>
 </head>
 <body data-page="products">
-<div id="site-nav"></div>
-
 <main>
-
-<section class="phead" style="padding-bottom:0;border-bottom:0">
-  <div class="wrap">
-    <nav class="crumb" aria-label="Breadcrumb">
-      <a href="index.html">PX98</a> / <a href="products.html">Products</a> / <span id="pd-crumb">Product</span>
-    </nav>
-  </div>
-</section>
-
-<section class="sect" style="padding-top:36px">
-  <div class="wrap">
-    <div class="pd" id="pdetail"></div>
-  </div>
-</section>
-
-<section class="sect sect--ink1">
-  <div class="wrap">
-    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:32px">
-      <h2 class="d3" data-rv>Also in this family</h2>
-      <a class="mono" href="products.html" style="color:var(--y)" data-rv>View the full range</a>
+  <section class="sect">
+    <div class="wrap">
+      <p class="mono" style="padding:120px 0">
+        Taking you to the product.
+        <a href="products.html" style="color:var(--y)">View the full range</a> if nothing happens.
+      </p>
     </div>
-    <div class="pgrid" id="pd-related"></div>
-  </div>
-</section>
-
+  </section>
 </main>
-
-<div id="site-foot"></div>
-<script src="assets/js/products.js"></script>
-<script src="assets/js/px98.js"></script>
-<script src="assets/js/chat.js"></script>
 </body>
 </html>
