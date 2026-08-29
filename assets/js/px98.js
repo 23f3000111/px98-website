@@ -19,7 +19,7 @@
      or a link that goes nowhere. Fill these in and the footer, the contact page and
      both enquiry forms pick them up with no other change. */
   var SITE = {
-    email:   '',
+    email:   'support@px98lubricants.com',
     phone:   '',
     address: '',
     /* Where the two enquiry forms POST. Anything that accepts a plain multipart form

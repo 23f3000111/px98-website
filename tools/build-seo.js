@@ -34,7 +34,8 @@ const path = require('path');
 const ROOT   = path.resolve(__dirname, '..');
 const ORIGIN = 'https://www.px98lubricants.com';
 const OG     = ORIGIN + '/assets/img/brand/og-share.jpg';
-const TODAY  = new Date().toISOString().slice(0, 10);
+/* No longer stamped into the sitemap: lastmod was the only date signal the site
+   published, and Google was printing it as "1 day ago" against the result. */
 const YEAR   = new Date().getFullYear();
 
 /* ---------------------------------------------------------
@@ -301,8 +302,10 @@ function productPage(p) {
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,400..900;1,62..125,400..900&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="icon" href="favicon.ico" sizes="16x16 32x32 48x48">
-<link rel="icon" href="assets/img/brand/favicon-16.png" type="image/png" sizes="16x16">
+<link rel="icon" href="assets/img/brand/favicon-96.png" type="image/png" sizes="96x96">
+<link rel="icon" href="assets/img/brand/favicon-48.png" type="image/png" sizes="48x48">
 <link rel="icon" href="assets/img/brand/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="icon" href="assets/img/brand/favicon-16.png" type="image/png" sizes="16x16">
 <link rel="apple-touch-icon" href="assets/img/brand/apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
 <meta name="theme-color" content="#08090a">
@@ -398,7 +401,6 @@ function sitemap() {
     pages.map(u =>
       '  <url>\n' +
       '    <loc>' + u.loc + '</loc>\n' +
-      '    <lastmod>' + TODAY + '</lastmod>\n' +
       '    <changefreq>' + u.freq + '</changefreq>\n' +
       '    <priority>' + u.pri + '</priority>\n' +
       '  </url>'
@@ -518,6 +520,6 @@ for (const f of fs.readdirSync(ROOT).filter(n => n.endsWith('.html')).sort()) {
 console.log('PX98 SEO build');
 console.log('  products   ' + PRODUCTS.length + ' pages');
 console.log('  llms.txt   ' + PRODUCTS.length + ' products listed');
-console.log('  sitemap    ' + (PRODUCTS.length + 7) + ' urls, lastmod ' + TODAY);
+console.log('  sitemap    ' + (PRODUCTS.length + 7) + ' urls');
 console.log('  chrome     written into ' + touched.size + ' pages');
 if (skipped.length) console.log('  no markers ' + skipped.join(', '));

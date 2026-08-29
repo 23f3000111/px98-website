@@ -58,7 +58,7 @@ so the site is safe to leave live while these are outstanding.
 
 | Field | What it turns on |
 |---|---|
-| `email` | The email row on the contact page, and the mail fallback both forms use |
+| ~~`email`~~ | **Supplied 29 Aug 2026: `support@px98lubricants.com`.** Contact row, Organization schema, and the mail fallback both forms use |
 | `phone` | The phone row on the contact page |
 | `address` | The address row on the contact page |
 | `formEndpoint` | Real submission for both enquiry forms |
@@ -90,7 +90,7 @@ assets/
   img/brand/          wordmarks, plus the favicon set
   img/                photography and brand marks
 robots.txt            open to every crawler, names the answer engines explicitly
-sitemap.xml           generated: 7 pages + 37 products, with lastmod
+sitemap.xml           generated: 7 pages + 37 products
 llms.txt              generated: the site and the catalogue, stated for answer engines
 favicon.ico           16/32/48, the yellow "98" tile
 site.webmanifest      names the 192 and 512 install icons
@@ -163,7 +163,7 @@ the catalogue. It writes:
 | Output | What it is |
 | --- | --- |
 | `product-<id>.html` × 37 | A real page per product: own title, own description, own canonical, the spec sheet as static HTML, `Product` and `BreadcrumbList` JSON-LD |
-| `sitemap.xml` | All 44 URLs with `lastmod`. Every entry is verified self-canonical |
+| `sitemap.xml` | All 44 URLs. Every entry is verified self-canonical |
 | `llms.txt` | The site and the full catalogue as markdown, for crawlers that read it |
 | nav + footer | The static twin of `buildNav`/`buildFoot`, written into all 44 pages between `<!--{nav}-->` markers |
 | the product grid | All 37 cards as static HTML inside `products.html`, plus the `ItemList` JSON-LD in its head |
@@ -192,6 +192,30 @@ The FAQ answers are on the page as running text, not markup over an empty page. 
 requires FAQ structured data to match visible copy, and an answer engine has nothing to
 quote from a page that carries only JSON. `tools/` is in `.vercelignore`, so none of this
 deploys; only its output does.
+
+### Why the sitemap has no `lastmod`
+
+Google was rendering "1 day ago" beside the result, which the client asked to lose.
+There is no meta tag that suppresses it: Google prints a date when it believes it has
+one, and the only date this site published was the sitemap's `lastmod` - there is none
+in the copy and none in the structured data. So it is gone.
+
+The trade is real but small. `lastmod` is a hint about which pages are worth
+re-crawling first, which matters on a site of thousands of pages that change often.
+This one has 44 evergreen pages, and a clean snippet is worth more than the hint. If
+the catalogue ever starts changing weekly, put it back in `sitemap()` and accept the
+date. Note the change takes a re-crawl to show, and Google is not obliged to honour it.
+
+### Favicon
+
+The `.ico` at the root has always carried a 48px frame, so it was never the reason the
+icon was missing from search results. What the pages declared alongside it was only 16px
+and 32px PNGs, and Google picks from what it is offered. `favicon-48.png` and
+`favicon-96.png` are now declared ahead of them - 48 and 96 being the multiples of 48
+Google's own guidance asks for - all cut from `icon-192.png` by Pillow.
+
+Google crawls favicons on its own schedule, separately from the page. Expect the icon to
+appear on a later crawl rather than on the next one.
 
 ### The old product URLs
 
