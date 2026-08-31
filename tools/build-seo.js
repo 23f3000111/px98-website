@@ -169,6 +169,9 @@ function footHtml() {
       '<p>&copy; <span id="foot-year">' + YEAR + '</span> Prince Global Pte. Ltd. · Performance excellence since 1998</p>' +
       '<div class="foot-social"></div>' +
     '</div>' +
+    /* The studio credit. On its own line under the copyright rather than tucked in
+       beside it: the client asked for this one to be unmissable. */
+    '<div class="foot-credit"><p>Designed and developed by <a href="https://www.imsuyaglobal.com/" target="_blank" rel="noopener">Imsuya Global</a></p></div>' +
   '</div></footer>\n' +
   '<button id="totop" aria-label="Back to top"><svg viewBox="0 0 16 9" aria-hidden="true"><path d="M0 4.5h13M9.5 1l3.5 3.5L9.5 8" stroke="currentColor" stroke-width="1.6" fill="none"/></svg></button>';
 }

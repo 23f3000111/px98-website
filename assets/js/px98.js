@@ -132,6 +132,8 @@
             }).join('') +
           '</div>' +
         '</div>' +
+        /* Kept identical to footHtml() in tools/build-seo.js. */
+        '<div class="foot-credit"><p>Designed and developed by <a href="https://www.imsuyaglobal.com/" target="_blank" rel="noopener">Imsuya Global</a></p></div>' +
       '</div></footer>' +
       '<button id="totop" aria-label="Back to top"><svg viewBox="0 0 16 9" aria-hidden="true"><path d="M0 4.5h13M9.5 1l3.5 3.5L9.5 8" stroke="currentColor" stroke-width="1.6" fill="none"/></svg></button>';
   }
